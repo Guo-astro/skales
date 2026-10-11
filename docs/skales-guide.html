@@ -704,7 +704,7 @@
       <div class="logo-mark">S</div>
       <div>
         <div class="logo-text">Skales</div>
-        <div class="logo-version">v<span data-skales-version>12.9.46</span> User Guide</div>
+        <div class="logo-version">v<span data-skales-version>12.9.50</span> User Guide</div>
       </div>
     </a>
 
@@ -736,6 +736,7 @@
     <a href="#onboarding" data-chapter="start">First Launch</a>
     <a href="#sidebar" data-chapter="start">Home and Chat</a>
     <a href="#addons-view" data-chapter="start">Add-Ons, and the two views of Settings</a>
+    <a href="#paired-extensions" data-chapter="start">Chrome and Microsoft Office</a>
     <a href="#plugins" data-chapter="start">Plugins</a>
     <a href="#business" data-chapter="start">Business, and using Skales at work</a>
 
@@ -778,6 +779,7 @@
     <a href="#code" data-chapter="code">Skales Code</a>
     <a href="#chat-code-settings" data-chapter="code">Settings: Chat &amp; Code</a>
     <a href="#assist" data-chapter="code">Settings: Assist</a>
+    <a href="#typing-suggestions" data-chapter="code">Typing suggestions</a>
     <a href="#playground" data-chapter="code">Playground</a>
     <a href="#devkit" data-chapter="code">DevKit</a>
     <a href="#github-int" data-chapter="code">GitHub</a>
@@ -860,6 +862,7 @@
     <a href="#timezone" data-chapter="settings">Time zone and location</a>
     <a href="#themes" data-chapter="settings">Themes</a>
     <a href="#accents" data-chapter="settings">Your own accent colours</a>
+    <a href="#background" data-chapter="settings">Background and own picture</a>
     <a href="#deep-links" data-chapter="settings">skales:// links</a>
     <a href="#notifications" data-chapter="settings">Notification Center</a>
     <a href="#dashboard" data-chapter="settings">Dashboard</a>
@@ -889,7 +892,7 @@
 
     <!-- Hero: the front page only -->
     <div class="hero">
-      <div class="hero-badge">📖 Official Documentation &middot; v<span data-skales-version>12.9.46</span></div>
+      <div class="hero-badge">📖 Official Documentation &middot; v<span data-skales-version>12.9.50</span></div>
       <h1>Skales <span>User Guide</span></h1>
       <p>Your personal AI operating system. Set a goal, automate, create, all running locally on your machine.</p>
     </div>
@@ -1028,6 +1031,7 @@
         <a href="#onboarding">First Launch</a>
         <a href="#sidebar">Home and Chat</a>
         <a href="#addons-view">Add-Ons, and the two views of Settings</a>
+        <a href="#paired-extensions">Chrome and Microsoft Office</a>
         <a href="#plugins">Plugins</a>
         <a href="#business">Business, and using Skales at work</a>
       </div>
@@ -1159,6 +1163,90 @@
       <p style="color: var(--muted); font-size: 0.875rem;">Add-Ons is the list of what Skales already brings. What other people built, and what you build yourself, lives one page further on: see <a href="#plugins">Plugins</a>.</p>
     </section>
 
+    <section id="paired-extensions">
+      <h2><span class="icon">🧩</span> Chrome and Microsoft Office</h2>
+      <p>Skales can sit next to your work: as a side panel in Chrome, and as a task pane in Word, Excel, PowerPoint and Outlook. Both are clients of the Skales running on your computer. The models, your keys, the conversations and every approval stay in Skales; the panel and the pane carry no API key. They use the same encrypted connection as a paired phone, directly or over the encrypted relay, and you pair each one once in <strong>Settings → Extensions → Chrome &amp; Microsoft Office</strong>. That page also lists everything that is paired, with <strong>Disconnect</strong> beside each entry. The step-by-step page with the downloads is <a href="extensions.html">Install and connect the extensions</a>.</p>
+
+      <h3>Connect the Chrome side panel</h3>
+      <ol>
+        <li>Open <a href="extensions.html">the extensions page</a> (Settings → Extensions → Chrome &amp; Microsoft Office → <strong>Installation instructions</strong>), download the Chrome extension and unzip it.</li>
+        <li>In Chrome open <code>chrome://extensions</code>, switch on <strong>Developer mode</strong>, choose <strong>Load unpacked</strong> and pick the unzipped <code>chrome</code> folder.</li>
+        <li>Open Skales from the extension's button. The side panel shows its own origin, <code>chrome-extension://</code> followed by 32 letters. Copy it.</li>
+        <li>In Skales, under Settings → Extensions → Chrome &amp; Microsoft Office, choose <strong>Chrome</strong>, paste the exact origin and press <strong>Generate code</strong>. The code works once and for five minutes.</li>
+        <li>In the panel, enter the Skales server address and the code, then press <strong>Pair</strong>. On this computer the address is the one Skales runs on, for example <code>http://127.0.0.1:3000</code>; a remote address needs HTTPS.</li>
+      </ol>
+      <p>Chrome grants one permission only at installation: the debugger permission, which real key presses need. Everything else - access to a site, bookmarks, history, downloads - is asked for the first time a tool needs it: the panel shows <strong>Allow Chrome access</strong>, and Chrome remembers what you allowed.</p>
+
+      <h3>Connect Word, Excel and PowerPoint</h3>
+      <p>Office only loads add-ins from an HTTPS address, so the Office download brings a small local helper that serves the task pane over HTTPS and passes only the extension traffic on to Skales. You need Node and a trusted certificate for <code>localhost</code>; a company certificate works, or one made with <code>mkcert</code> (<code>mkcert -install</code>, then <code>mkcert -cert-file localhost.pem -key-file localhost-key.pem localhost 127.0.0.1 ::1</code>). Keep the private key out of any shared folder.</p>
+      <ol>
+        <li>Download the Office add-in from <a href="extensions.html">the extensions page</a> and unzip it.</li>
+        <li>In the unzipped folder run <code>node office/scripts/serve.mjs --cert=/path/localhost.pem --key=/path/localhost-key.pem --server=http://127.0.0.1:3000 --port=3443</code>. It needs no installation and prints the task pane address.</li>
+        <li>Open <code>https://localhost:3443/office/taskpane.html</code> in a browser once. If the certificate is trusted it opens and says that an Office host is needed.</li>
+        <li>Load <code>office/manifest.xml</code> into Office:
+          <ul>
+            <li><strong>Office on the web:</strong> Add-ins → More add-ins → My add-ins → <strong>Upload my add-in</strong>, where your organisation allows it.</li>
+            <li><strong>Mac:</strong> copy the manifest into the app's <code>wef</code> folder - <code>~/Library/Containers/com.microsoft.Word/Data/Documents/wef/</code>, the same under <code>com.microsoft.Excel</code> and <code>com.microsoft.Powerpoint</code> - then open it from Insert → Add-ins → My Add-ins.</li>
+            <li><strong>Windows:</strong> Microsoft's way for desktop Office is a shared-folder catalogue: share the folder that holds the manifest, add its network path under File → Options → Trust Center → Trust Center Settings → Trusted Add-in Catalogs with "Show in Menu" ticked, restart Office and open it from My Add-ins → Shared Folder (<a href="https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing">Microsoft's sideload guide</a>). Office on the web works the same on Windows as anywhere else.</li>
+          </ul></li>
+        <li>In Skales, under Settings → Extensions → Chrome &amp; Microsoft Office, choose <strong>Microsoft Office</strong>, enter <code>https://localhost:3443</code> and press <strong>Generate code</strong>. In the task pane keep the server address <code>https://localhost:3443</code>, paste the code and pair.</li>
+      </ol>
+      <p>Office is paired once. New documents and new panes get their own connection under that pairing without another code; a document keeps only an id, never a key. The pane can also open itself in new Word documents, PowerPoint decks and copies Skales makes (<strong>Enable automatic Skales opening</strong>), where Office supports it. With a port or a domain other than <code>localhost:3443</code>, change it in both manifests, in the helper command, in the pairing origin and in the Microsoft redirect address together.</p>
+
+      <h3>Connect Outlook and Microsoft 365</h3>
+      <p>Outlook uses its own manifest, <code>office/manifest-outlook.xml</code>: Add-Ins for Outlook → My add-ins → Add a custom add-in → <strong>Add from File</strong>. The pane then appears in messages you read or write and in appointments, and pairs exactly like Word. Reading the open message works straight away. Searching the mailbox, drafts and replies, attachments and the calendar go through Microsoft Graph and need a Microsoft 365 connection:</p>
+      <ol>
+        <li>An administrator registers an application in Microsoft Entra for the intended accounts, with a <strong>Single-page application</strong> redirect address <code>https://localhost:3443/office/oauth.html</code> (or your own HTTPS origin) and no client secret.</li>
+        <li>It gets the delegated Graph permissions <code>User.Read</code>, <code>Mail.ReadWrite</code>, <code>Mail.Send</code> and <code>Calendars.ReadWrite</code>, with tenant consent where your organisation requires it.</li>
+        <li>In the Outlook pane choose <strong>Connect Microsoft 365</strong>, enter the application (client) ID and the tenant ID or <code>common</code>, and sign in with Microsoft. The client ID is public configuration, not a key.</li>
+      </ol>
+      <p>The Microsoft tokens live only in the pane's memory: after closing or reloading the pane, Outlook asks you to sign in again, while the pairing and your conversations stay. To try the Outlook tools without touching a real mailbox, use a separate Microsoft 365 test account or test tenant with mail and appointments you can throw away.</p>
+
+      <h3>What the extensions can do</h3>
+      <p>Both bring the Skales chat with model choice, attachments and pictures, tool progress, Stop and the usual approval cards, and both restore their conversations from Skales when reopened. The tools run in your own browser or document:</p>
+      <ul>
+        <li><strong>Chrome:</strong> tabs and tab groups, navigation, page text, element references, selections, tables and forms; find, click, type, select, fill and submit; keys and scrolling; screenshots of a tab or a region; downloads and uploads; bookmarks and history.</li>
+        <li><strong>Word:</strong> read the text, insert text, paragraphs, tables, pictures and HTML, replace, styles, headings, fonts and lists, comments and tracked changes, new documents.</li>
+        <li><strong>Excel:</strong> values and formulas, tables, charts, PivotTables, formatting, several worksheets and numeric analysis.</li>
+        <li><strong>PowerPoint:</strong> read slides, add, move and delete slides, text, pictures, speaker notes and whole new decks.</li>
+        <li><strong>Outlook:</strong> the open message, mailbox search, drafts, replies and forwards, attachments, calendars and appointments. Sending is its own step under your approval; a draft or a reply never sends by itself.</li>
+      </ul>
+
+      <h3>Limits of the Chrome and Office extensions</h3>
+      <ul>
+        <li><strong>64 MB per file or result.</strong> Screenshots, pages, documents and attachments larger than one message travel in pieces; anything over 64 MB is refused with that reason instead of waiting for a timeout.</li>
+        <li><strong>Speaker notes are written into a copy.</strong> Office cannot edit speaker notes in place, so Skales writes them into an updated copy of the deck that opens as a new presentation, and says so.</li>
+        <li><strong>A new document is a new target.</strong> After Skales opens a new document or a copy, the original pane refuses further changes to the original until you choose <strong>Continue in original document</strong>. To work in the new one, open Skales in its pane.</li>
+        <li><strong>One app per pane.</strong> A Word tool needs a Word pane; asked from Excel it answers which app it needs.</li>
+        <li><strong>Things that stay with you.</strong> Passwords, one-time codes and payment details are typed by you. Chrome's own pages and protected store pages cannot be controlled.</li>
+        <li><strong>Element references expire.</strong> A reference belongs to one page load; after a navigation or reload Skales reads the page again.</li>
+        <li><strong>Two minutes per step.</strong> A tool that gets no answer from the panel or pane in that time is stopped and reported; check the page or document before repeating an action, because its outcome may be unknown.</li>
+      </ul>
+
+      <h3>When an extension does not connect</h3>
+      <table>
+        <thead><tr><th>What you see</th><th>What to do</th></tr></thead>
+        <tbody>
+        <tr><td>Pairing code is invalid, expired, or belongs to another origin.</td><td>Generate a new code - it lasts five minutes and works once - and check that the origin in Settings is exactly the one the panel shows.</td></tr>
+        <tr><td>Enter the exact extension origin.</td><td>Chrome takes <code>chrome-extension://</code> plus the 32-letter id; Office takes the HTTPS origin of its pane, such as <code>https://localhost:3443</code>.</td></tr>
+        <tr><td>This device identity is already paired. Disconnect it first.</td><td>Disconnect the old entry in Settings → Extensions → Chrome &amp; Microsoft Office, then pair again.</td></tr>
+        <tr><td>Use HTTPS for a remote server, or HTTP on localhost.</td><td>Enter <code>http://127.0.0.1:3000</code> on this computer, or an HTTPS address for Skales elsewhere.</td></tr>
+        <tr><td>Office needs HTTPS.</td><td>Use the helper's address <code>https://localhost:3443</code> as the server in the pane, not the plain Skales address.</td></tr>
+        <tr><td>The pane stays blank, or the certificate is refused.</td><td>Open <code>https://localhost:3443/office/taskpane.html</code> in a browser; if it is not trusted, install the certificate's trust (for example <code>mkcert -install</code>) and restart the helper.</td></tr>
+        <tr><td>Microsoft Office.js could not load.</td><td>The pane needs to reach <code>appsforoffice.microsoft.com</code>; check the connection and reopen the pane.</td></tr>
+        <tr><td>Skales server is unreachable / The encrypted relay is unreachable.</td><td>Start Skales. Without a direct connection the extension uses the relay, which needs remote access switched on in Skales.</td></tr>
+        <tr><td>Extension is not connected / Extension is offline.</td><td>Open the panel or pane and press <strong>Reconnect</strong>.</td></tr>
+        <tr><td>Skales needs Chrome access for this action.</td><td>Open the side panel and press <strong>Allow Chrome access</strong>.</td></tr>
+        <tr><td>This tool needs Excel; the connected task pane is in Word.</td><td>Open Skales in the app the tool belongs to.</td></tr>
+        <tr><td>Microsoft 365 is not connected / Microsoft sign-in expired.</td><td>Use <strong>Connect Microsoft 365</strong> in the Outlook pane; a missing application ID or consent is named with its reason.</td></tr>
+        <tr><td>This Office pairing was revoked.</td><td>Pair Office again from Settings with a new code.</td></tr>
+        <tr><td>Extension did not answer in time.</td><td>Look at the page or document first, then check the panel for a permission or connection message before trying again.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Disconnect an extension</h3>
+      <p>Settings → Extensions → Chrome &amp; Microsoft Office lists every paired extension with <strong>Disconnect</strong>. It removes the extension's access and its pending tool calls at once; for Office it also ends every document pane under that pairing. Once no paired extension uses an origin, that origin can no longer reach Skales. Each extension is independent, so disconnecting Office leaves Chrome and your phone connected. In the panel itself, <strong>Disconnect</strong> stays disconnected until you press Reconnect, closing the panel does not disconnect anything, and <strong>Disconnect Microsoft 365</strong> in Outlook forgets only the Microsoft sign-in.</p>
+    </section>
     <section id="plugins">
       <h2><span class="icon">🔌</span> Plugins</h2>
       <p>A plugin is a tool of its own inside Skales. It is the step above a widget: a widget is a card on the Dashboard, a plugin is a <strong>page</strong> - its own entry in the sidebar, its own icon, its own screen, and its own storage that nothing else writes into.</p>
@@ -1172,6 +1260,9 @@
       <p>A plugin marked <strong>By Skales</strong> is written and maintained by us and is inside the app, so installing it downloads nothing. Everything else comes from its own author's repository, is fetched from the release they published, and is checked against the checksum they published beside it. The small <strong>?</strong> next to the heading says the same thing in two sentences, and it is worth reading once: community plugins are not reviewed or maintained by Skales, and they run with exactly the permissions written on their card.</p>
       <p>The catalogue itself is a public directory, <a href="https://github.com/skalesapp/plugins">github.com/skalesapp/plugins</a>, and anybody can publish into it. What is listed there is a <em>pointer</em>: who publishes the plugin, which release it is served from, which version it is and what it asks for. The code is never copied into the directory, so what lands on your machine comes from the author who wrote it, and the same page tells you how to add your own.</p>
       <p>If the catalogue cannot be reached - no connection, or the registry is down - the page shows the last copy it fetched with the date it was fetched on, and the bundled plugins are there either way. It is never blank.</p>
+
+      <h3>Start from a template</h3>
+      <p>Under the catalogue, <strong>Start from a template</strong> offers small plugins that already work and are meant to become yours: <strong>List</strong>, a page that keeps a list with undo and needs nothing set up; <strong>Ask</strong>, a page that asks your model and keeps the last answers; <strong>Weekly review</strong>, an agent that writes a short review of your tasks every Friday and lists it on its page; and <strong>Snippets</strong>, a page of text you reuse that brings two tools of its own, so the chat can search your snippets and suggest new ones that wait for you to add them. That Friday run costs one agent run a week, so it starts paused unless you switch it on on the card. Give it a name and it is on your shelf. Then change it by hand, or ask the chat, for example <em>"Change the plugin My list so that every item has a due date."</em> How a plugin is built so that it holds up - the brief, the three modes, where your approval sits, checking and sharing - is on the <a href="plugin-blueprint.html" style="color:var(--accent)">plugin blueprint page</a>.</p>
 
       <h3>The shelf</h3>
       <p>Below the gallery is what you already have. Type a name into <strong>Start a new plugin</strong> and you have an empty one: the name becomes the menu entry, and building the same name again changes that plugin instead of leaving you with two of them.</p>
@@ -1416,6 +1507,9 @@
       <h3>What a single answer cost</h3>
       <p>The meter answers &ldquo;what has this conversation cost&rdquo;, never &ldquo;which answer cost it&rdquo; &mdash; and a screenshot step that charges a quarter of a dollar disappears into a session total. <strong>Analyze</strong>, opened from the bar under an answer, carries the same sum the meter carries in its header, and every turn in its log names its own price beside its tokens. The report you copy as text carries both figures. A provider that reported no price says so, because a zero reads as an answer that was free.</p>
 
+      <h3>Claude on your own Anthropic key</h3>
+      <p>Chat, Skales Code and Flow price Claude Opus, Sonnet, Haiku and Fable on your Anthropic key from Anthropic&rsquo;s own list, so these turns show a real price instead of &ldquo;price unknown&rdquo; and count toward the meter and the session ceiling. Reads from the prompt cache and writes into it are billed at their own rates, which is why a long conversation with a stable start costs less per turn than its token count suggests. A Claude model Anthropic has not priced yet still says unknown rather than borrowing an older model&rsquo;s rate.</p>
+
       <h3>Every step and its price</h3>
       <p>In Flow, the price in the head of the conversation opens its <strong>steps</strong>: grouped by the message that started them, each with the tools it called, whether they worked, how long it took and what it cost. Team runs list each member, and an action waiting for your approval stands in the same list. The chat shows the same steps in <strong>Analyze</strong>. The steps always add up to the price under the composer and to the price the phone shows, including what an undo took out of the conversation. The members and the coordinator of a team run count in that price too.</p>
 
@@ -1578,9 +1672,18 @@
       <p>Every ten of your messages or ten tool steps, Skales takes a short look back on the helper model and keeps what is worth keeping: facts about you, how-to lessons, and <strong>procedures</strong> — step-by-step instructions for a kind of task, which it finds and follows next time. Your corrections come first: "shorter, and always as a table" ends up in the procedure for that task. When something was kept, one quiet line in the chat says <em>Memory updated</em> and links to it. Nothing is ever kept from an Incognito conversation, and the look-back's cost is part of the conversation's price.</p>
       <p>Finished conversations are also summarised during the day, hourly and at most 24 a day, so "what did we do this morning" has an answer before the night's Dreaming. Both switches are in Settings → Memory → Learning.</p>
       <p>Procedures Skales wrote show on the Custom Skills page as <em>written by Skales</em>, with their version and how often they were read; <strong>Undo last change</strong> puts the previous text back. A skill you brought is only changed when you ask for it. Three commands open the door by hand: <code>/learn</code> followed by a folder, a link, a PDF or nothing ("what we just did") turns it into a procedure; <code>/refine</code> runs the look-back now; <code>/btw</code> asks a side question without disturbing a turn that is working.</p>
+      <p><strong>Keep only after your OK.</strong> With <em>Keep new things only after my OK</em> switched on in Settings → Memory → Learning, nothing Skales would learn is written straight away, whichever way it learned it (a tool, the look-back, <code>/learn</code>, "remember that ..." in any language, the hourly summaries, a Flow rating, AIPointer, your phone): facts, lessons, new procedures and changes to them (also a rewrite, a removed reference file, archiving and restoring) wait in a <em>Waiting for your OK</em> block at the top of the Memory page and under the learning line in the chat, each with Keep and Discard. A merge the weekly tidy-up of procedures proposes waits there too, with <em>Merge</em> and <em>Keep apart</em>. <em>Keep all</em> and <em>Discard all</em> decide only what is on screen. What you discard, and what you removed in the Journey, is one block list: nothing automatic learns it again, whether approval is on or off, and when you ask for it in so many words Skales checks with you once. Nothing is dropped without your decision. When the same thing is said again in more detail before you decide, the entry grows instead of a second one appearing; keeping an older entry never overwrites a newer memory, and an entry that changed after you looked asks you to look again. A longer entry shows its full text behind <em>Show content</em>, and Keep waits until you opened it. A paired phone shows and decides the same list.</p>
+      <p><strong>The same learning on every channel, only from you.</strong> Telegram, WhatsApp, Discord and the terminal learn the way the chat does, and only from the owner: on Telegram whoever paired the bot, on Discord the user ID you enter under Settings → Channels &amp; Devices → Discord. Everybody else is answered, but nothing they say is kept, they cannot change or delete a memory, and an approval card their message raised can only be confirmed by you. Telegram answers each sender on their own. If Skales does not know who you are on a channel, it says once where to set it, and so does that channel's section in Settings. For you, the look-back counts these turns too, its cost goes to that conversation's daily budget, and one short line after the answer says what was kept, in a group only how many (switch it off with <em>Say in the channel what was kept</em>). <code>/learn</code>, <code>/refine</code> and <code>/btw</code> work there as well. A message you send while Skales is working joins the turn at its next step, unless you chose "After the turn" under Settings → Assistant → Working style &amp; Autonomy; "stop" still stops at once. A conversation with a local model is never sent to a cloud helper for the look-back; Skales skips it and says so. When the helper model runs on this computer, the look-back waits until nothing else is running, so it never slows your next message, and Stop or deleting the conversation ends it.</p>
 
       <h3>Searching your memory</h3>
       <p>The Memory page opens with a <strong>search box over everything stored</strong> — topic names and the text inside them, across the index, the topic files and the saved short-term, long-term and episodic records, with the matches highlighted. A <strong>Meaning</strong> toggle appears when you have an embedding provider configured, so you can search by what you meant rather than the exact words. Skales itself can search its memory the same way, so it can find a note it wrote months ago without you naming the topic, and asking for a topic that does not exist answers with the closest ones that do.</p>
+
+      <h3>Your learning journey</h3>
+      <p>The Memory page has a second view, <strong>Journey</strong>: everything Skales learned on one timeline, newest first. Facts, remembered notes, lessons from goals, each agent's lessons, the procedures Skales wrote and every change to them, episodes, the weekly tidy-ups and what waits for your approval. Open an entry to read it in full, correct it, or remove it. Removing a procedure archives it; removing anything else keeps its text, so <strong>Show removed and archived</strong> brings it back with Restore, and Skales does not learn a removed fact or lesson again on its own. Type <code>/journey</code> in the chat to open it; in the Code window, a messenger or on your phone the same command answers with the newest ten entries.</p>
+
+      <h3>Procedures stay tidy</h3>
+      <p>Once a week, after two quiet hours, Skales tidies up the procedures it wrote for itself: one nobody used for 14 days is marked as unused, one unused for 30 days moves to the archive. Nothing is deleted, and <strong>Pin</strong> keeps a procedure out of it. Skills you brought, Flow lessons and a project's own skills are never touched. Custom Skills shows the last tidy-up with <strong>Tidy up now</strong> and <strong>Undo last tidy-up</strong>, and the archive with Restore. If you switch on <em>Merge near-duplicate procedures</em> in Settings → Memory → Learning, the tidy-up also folds procedures that cover the same task into one, with one short call on the helper model; that, too, can be undone.</p>
+      <p>When a chat or a Code session works in a folder you trust, the skills the project brings in <code>.skales/skills</code>, <code>.agents/skills</code> or <code>.claude/skills</code> come first, ahead of a skill of the same name on your computer. Skales changes one of them only when you ask.</p>
 
       <h3>Adapts to how you work</h3>
       <p>Over time Skales builds a quiet sense of how you like to work and folds it into memory, and it distills the approaches that carried past goals to a finish into reusable plans. Now and then it surfaces one short question to understand you better, never while it is busy and never often, with a quiet notification and a dot next to Chat so it is not missed. You can set your agent's character outright when you join Discover, and clear everything Skales has picked up about you at any time, from Settings or right in the chat.</p>
@@ -1779,6 +1882,14 @@
       <h3>Organization &mdash; when you want the work done</h3>
       <p>Reach for this when the job splits into parts that different agents should own: research this, draft that, check the numbers, then write it up. You describe the task in the chat and name the team; the leader breaks it into subtasks, names which agent gets each one, and states which subtasks depend on which. Agents work with tools. The leader then synthesises everything into one answer. The Organization surface has no menu entry in this build — see <a href="#organization" style="color:var(--accent)">Organization</a> for what that changes and what it does not.</p>
       <p><strong>Why the steps do not finish in plan order.</strong> Subtasks that declare no dependency are independent by definition, so they are started together; the ones that declared a dependency run afterwards, each seeing everything finished so far. A five-step plan whose third step waits on another can therefore finish 0-1-3-2-4. That is the schedule working, not a fault, and the live trace now says which steps are waiting on which rather than leaving you to infer it.</p>
+
+      <h3>Automatic plans with phases</h3>
+      <p>For a complex task, or when you ask &ldquo;plan and distribute&rdquo; (German: &ldquo;plane und verteile&rdquo;), the lead creates a plan for your actual request. It shows the phases and each part&rsquo;s instruction in the conversation. Confirm the existing approval card to start; unrestricted mode follows its existing permission rules. Independent parts within a phase run together, while the next phase waits. Each part carries its own context and configured model route, including NVIDIA NIM and local providers. Set parallel capacity in Settings &gt; Security &amp; Privacy, under Agent tasks; it has no fixed product maximum.</p>
+      <p>The existing task trace shows phase and part progress in Chat and Code. Work continues in the background and restores its saved phases, completed results and retry counters after restart. A part retries once; a repeated failure becomes a named gap. A part whose assigned role shares no tool with the tools this conversation may use stops at once, names both lists and becomes a gap rather than running as a helper without tools. The lead then compares sources, identifies contradictions and missing results, and writes the final answer into the original conversation. Planner, worker and reconciliation costs appear in the same conversation cost display. A paired phone receives the same plan state and checklist; standalone Mobile uses the same phased contract. Stop on the task trace stops all remaining workers and reconciliation. Approving a plan never approves the tools its workers may later request: those still ask in the original conversation.</p>
+
+      <h3>Watching the agents work: the agent panel</h3>
+      <p>Whenever more than one agent works on something &mdash; sub-agents of a chat turn, a job split into background parts, a plan with phases, a team run &mdash; the conversation shows one panel for it, open in the stream in the chat, Skales Code, Flow and Iris, never folded behind a header. Its head names the job and, for a dispatched job, carries Stop; under it a line for the lead says the phase, the answers so far and the time, then one band per phase: its head says how many of its agents have ended, how long the longest took and how many tokens it used, and a finished band folds itself away. Each agent is a tile with a rounded honeycomb cell carrying its role icon; the cell&rsquo;s outline says the state &mdash; dashed while it waits, pulsing while it works, filled with a tick when it answered, a dash when it came back empty, red with a cross when it failed. The counters above say how far each phase is (&ldquo;Research 3/13&rdquo;); click one to bring that phase forward.</p>
+      <p>Click a tile for its detail: role and phase, the errand it was given, model, tokens, cost, run time, steps and attempt, its last steps, and its result or error. From there you can <strong>Stop</strong> that one agent (the others carry on), <strong>Steer</strong> it with a message it reads after its current step, or <strong>Restart</strong> it once it has ended &mdash; only that one runs again, and only that one is paid for again, so Skales asks first. A restarted helper of a finished chat turn keeps its new answer with its run; ask in the chat to use it. <strong>As table</strong> folds out the same agents as rows of agent, state, tokens and time. With reduced motion the cells stop pulsing and keep their shapes.</p>
 
       <h3>What your agent&rsquo;s own prompt is worth in a team run</h3>
       <p>All three modes attach some context to your agent about the run it is part of. <strong>Your agent&rsquo;s own system prompt wins.</strong> Where the run context conflicts with it &mdash; the output format it demands, the length, the things it is told never to say &mdash; your prompt is the contract and the run context yields. This is stated in the prompt itself, so the model is not left to guess which of two instructions is the real one.</p>
@@ -2181,6 +2292,7 @@
 
       <h3>Several agents at once</h3>
       <p>A coding session can send work to sub-agents and run them in parallel. A rail shows what each one is doing and what it has cost, and one button stops all of them.</p>
+      <p>A sub-agent that is still working can be told something: the speech-bubble icon on its row opens a one-line field, and it reads your message after the step it is on. A message that arrives after its last step is shown as not delivered rather than lost. Each helper keeps an id, so you can ask Skales afterwards to give one of them more work or to run only the one that failed again. A helper can also be asked to answer in a fixed JSON shape; if it misses, it gets one chance to correct it, and an answer that still misses is marked.</p>
 
       <h3>Your terminal</h3>
       <p>Under the box you type into, a real terminal: your login shell, in the session&rsquo;s folder, with your profile. Not a command field, so <code>vim</code>, <code>top</code>, an interactive prompt, colours, arrow keys and Ctrl-C all behave the way they do anywhere else. Open it with the switch in the title bar or by typing <code>/terminal</code>, drag its top edge to resize it, and open more than one tab if you want.</p>
@@ -2193,7 +2305,10 @@
 
       <h3>Typing: @, drag, and /</h3>
       <p>Typing <code>@</code> offers the files of the repository, matched on the whole path so a folder name finds them. Drop files onto the box, paste a screenshot, or use the paperclip: video, audio, PDFs and archives attach the way they do in a chat. A slash at the <em>start</em> of a line opens the commands a coding session has: switch mode, open review, commit, open a pull request, stop, start a new session, clear, open the terminal. A slash anywhere else is just a path.</p>
-      <p>Six of them are the ones every coding tool has. <code>/undo</code> takes back the last turn that changed files, puts the files back and your question into the box, and pressed again takes back the turn before; changes a shell command made are not part of it. <code>/resume</code> carries on a session that stopped half way, or opens your sessions when nothing stopped. <code>/cost</code> shows what the session has cost and what fills its context. <code>/diff</code> opens the review of what changed. <code>/init</code> has the session read the project and write its <code>AGENTS.md</code>, or update the <code>CLAUDE.md</code> it already reads, folding in rules other coding tools left there. <code>/model</code> opens the model picker, and <code>/model</code> with a name switches straight to that model.</p>
+      <p>Seven of them are the ones every coding tool has. <code>/undo</code> takes back the last turn that changed files, puts the files back and your question into the box, and pressed again takes back the turn before; what a shell command changed is taken back too wherever Git is on the machine. <code>/redo</code> puts an undone turn back, files and conversation, the most recent undo first; the same Redo is a button in a line above the box, and it lasts until you send the next message, also across a restart. A file you edited by hand since the undo is named and kept, and then nothing is redone. <code>/resume</code> carries on a session that stopped half way, or opens your sessions when nothing stopped. <code>/cost</code> shows what the session has cost and what fills its context. <code>/diff</code> opens the review of what changed. <code>/init</code> has the session read the project and write its <code>AGENTS.md</code>, or update the <code>CLAUDE.md</code> it already reads, folding in rules other coding tools left there. <code>/model</code> opens the model picker, and <code>/model</code> with a name switches straight to that model.</p>
+
+      <h3>Checking what was written</h3>
+      <p>After every write the session asks the language server for that file type whether the file still compiles, and the agent reads the answer in the same turn: TypeScript and JavaScript, Python, Go, Rust, C, C++ and Objective-C, Java, C#, PHP, Ruby, Kotlin, Swift, Lua, Bash, YAML, JSON, HTML, CSS, Dockerfile and Terraform. A server that is not installed yet is asked for on a card that names the command, chosen from the package manager your computer has (npm, Homebrew, rustup, the .NET SDK, RubyGems, scoop or winget, depending on the language and system), and where it lands. Your yes covers exactly the command on the card; if your computer would use a different one later, you are asked again. The install runs in the background while the session carries on, and the next file written after it lands is checked. If it fails, the card offers it again instead of the session retrying it after every write, and Apple&rsquo;s installer window only opens when you click. Where a system has no install command for a language, the card says which program to install yourself. Saying no leaves everything else working.</p>
 
       <h3>Keys</h3>
       <p><strong>Esc</strong> stops a running turn, through the same stop as the button; pressing it again while the stop is on its way does not stop anything else. With nothing running, <strong>Esc Esc</strong> opens your last message for editing. <strong>Shift+Tab</strong> in the box you type into moves to the next mode: Ask, Plan, Code, Auto, and round again. An open menu, dialog or editor, and your terminal, keep their own Esc. All of them are listed under Keyboard shortcuts in the command palette.</p>
@@ -2245,6 +2360,9 @@
         <li><strong>AGENTS.md</strong> is how you want work <em>done</em> in a project: the test command, the commit style, the folders nothing may touch. It belongs to a project, at its root, and every coding session on that project reads it.</li>
       </ul>
       <p>Both are plain files &mdash; the path is printed under the box, and editing the file in a text editor is the same edit. If it changed on disk while you had unsaved text in the box, Skales says so rather than writing over it. Two places leave your standing instructions out on purpose: an isolated agent, which carries nothing of yours by design, and the calls Skales makes to itself.</p>
+      <h3>Under Persona, and at the very top</h3>
+      <p>The same SKALES.md box also sits under <strong>Settings &rarr; Assistant &rarr; Persona</strong>, below the persona text, because that is where people look for rules every agent should follow. The persona text belongs to the default agent alone; SKALES.md applies to every agent, your own included, and the persona field says so and points to it. AGENTS.md stays here in Chat &amp; Code.</p>
+      <p><strong>Put them at the very top</strong> is off until you switch it on. Off, your standing instructions follow Skales&rsquo; own rules, as they always did. On, they are the first lines every agent reads: in the chat, in your own agents, in Code, on the messengers and in Buddy. Either way they stay inside the part of the prompt a provider can cache, and the position holds for as long as the file does not change. With the switch on, saving an edit re-reads the whole cached prompt once instead of only its end. Your own instructions never outrank Skales&rsquo; safety rules, wherever they stand.</p>
       <h3>Priority</h3>
       <p>Most specific wins: <strong>the project&rsquo;s own file</strong>, then <strong>your global instructions</strong>, then <strong>this session</strong>. A rule you set for one session beats the same rule set globally, and a project that ships its own conventions beats both.</p>
       <h3>Watermark</h3>
@@ -2287,6 +2405,17 @@
       <p>Normally your conversation never touches a Skales server. This one line is the exception. The server sees the first sentence of your message and nothing else - no history, no system prompt, no files - and it keeps none of it: measured on the server, the lane stores a request counter and your device id as a one-way hash for rate limiting, and no text at all. Off by default.</p>
       <p>One boundary belongs next to that, because it is a different kind of promise: this is what <em>our</em> server does, and it is measured. The model that actually writes the sentence runs at a provider, and there the guarantee is the zero-data-retention setting Skales sends with every such request - a commitment we require, not something we can measure from here.</p>
       <p>If the lane is switched off on the server side, you get no line and no error: the feature is best-effort by design and never makes you wait twice. It does say so once, quietly, in <strong>Settings &gt; System &gt; Diagnostics</strong>, so a switch that looks on but produces nothing can be explained rather than guessed at.</p>
+    </section>
+
+    <section id="typing-suggestions">
+      <h2><span class="icon">⌨️</span> Typing suggestions</h2>
+      <p>While you type, the rest of the sentence appears in grey behind the cursor. Press <strong>Tab</strong> to take it, <strong>Esc</strong> or simply keep typing to drop it. When the box is empty after an answer, the grey text is the message you are most likely to send next, and Tab takes that too. It works the same in the chat, the new-chat page, Skales Code, Flow, Lio AI and Iris.</p>
+      <p>Nothing is asked on every key. A small model is asked once you pause for about half a second, and a question still on its way is cancelled the moment you type the next letter. While a turn is working, while the slash or mention menu is open, and while an input method is composing, there is no grey text. Shift+Tab and Esc keep their usual jobs whenever nothing grey is shown: Esc still stops a run in Skales Code, the press after the one that dropped the suggestion.</p>
+      <h3>Where the suggestions come from</h3>
+      <p><strong>Settings &rsaquo; Assistant &rsaquo; Typing suggestions</strong>. The default is a model on this computer: Skales Local, or Ollama when Skales Local is not running. Skales takes the model that is already in memory, so nothing is loaded twice, or the smallest one installed. It is free and nothing leaves the machine. Without any local model the composer simply stays quiet; the row says so and offers to set up Skales Local.</p>
+      <p>You can choose a cloud model instead, but only a small, fast one (flash, mini, lite and the like). A large model, or one whose price Skales cannot tell, is refused with a sentence that says why, because it would be asked after every pause. What the cloud model costs is added to the conversation's own cost, so the cost line and the session ceiling see it. A free tier that answers "too many requests" is left alone for a minute while the local model stands in, quietly; the chat model is never used for this. With Privacy Mode on, suggestions only ever come from this computer.</p>
+      <h3>What is never predicted</h3>
+      <p>Key, password and secret fields have no suggestions at all. A message that carries a key, a token or a password is never sent for a suggestion, and neither are the turns of the conversation that do. Slash commands and @mentions are left to their own menus. Skales Mobile has the same suggestions in its composers: a tap on the chip above the field takes one, and they come from the model loaded on the phone or from this computer over the pairing.</p>
     </section>
 
     <section id="playground">
@@ -2445,6 +2574,7 @@
     <section id="studio">
       <h2><span class="icon">🎨</span> Skales Studio</h2>
       <p>An all-in-one AI creative suite built into Skales. Generate images, videos, voice audio, and music — all from a single interface. Every output is saved to your Gallery and can be reused at any time.</p>
+      <p>While an image, a video or a page is being made, the space it will fill shows a honeycomb in your accent colour, in the shape of the result. Cells light from the middle out as the work reports progress &mdash; a render with a percentage fills in proportion and shows the figure, a page lights one cell for each kilobyte written &mdash; and an ordinary image call, which reports nothing until the picture is there, fills the frame on a clock that slows down and never reaches the end, without a number, so you see it building. Chat, Studio, Flow and Skales Code draw the same thing for every image, edit, video, page or 3D model a tool makes, and the finished result fades in where the cells were.</p>
 
       <h3>The doors</h3>
       <p><strong>Sidebar &rsaquo; Studio</strong> lands in <a href="#flow" style="color:var(--accent)">Flow</a>, and the making surfaces that have no sidebar entry of their own are named on Flow&rsquo;s home screen as doors: <strong>Lio AI</strong>, <strong>Studio Classic</strong>, <strong>3D</strong> and the <strong>Video Editor</strong>. They sit on the entrance because choosing where to work is a question the entrance asks; once a project is open, the choice has been made.</p>
@@ -2472,12 +2602,15 @@
       <p><strong>Then ask for the cut.</strong> Say what you want in the chat - a two minute version, the parts where the product is on screen. Skales names the stretches that make the film, each with one sentence of reasoning you can read, and lays them into the timeline with a thumbnail and a length beside every piece. Every segment is checked against what the sighting actually found and against the real length of its source, and anything that does not survive that check is thrown out and <em>named</em> as thrown out - you are told what it dropped and why, rather than quietly getting a shorter list.</p>
       <p><strong>Correcting the plan changes the plan.</strong> Take the third one out, make the opening shorter, put the ending back. There is only ever one plan per project, so what you asked for is what is on screen afterwards, and there is never a second plan sitting behind the first one.</p>
       <p>The Editor cuts, trims, reorders and exports. It is not a multi-track suite, and it does not pretend to be one. Exports report back to the bell and to the chat they were started from, so a long render does not need watching.</p>
+      <p><strong>Generated clips belong in the same cut.</strong> A clip Skales made from a start picture is footage like any other, and it can be slowed down or sped up where it sits. Ask for the moment that matters to land on a beat - the car launching on the logo, the blink on the word - and the clip is cut around that moment so it hits exactly that second, with its sound kept in step or switched off. Every generated clip comes back with its start picture beside three of its frames, so a wrong picture is noticed and made again before it goes into the film; a clip the service refuses comes back with a softer wording to try.</p>
+      <p><strong>The soundtrack in one step.</strong> Ask for the sound of the film and Skales mixes the voice lines on their seconds, the music ducked under the voice with its drop on the cut you name, the music lengthened by whole bars when it is too short, tape stops, sound effects on their cues and the clips' own sound, then brings the whole track to -14 LUFS. You get the mix and separate stems for voice, music, effects and clips, and Skales tells you what it measured: loudness, peak, how far the music sat under the voice, where the drop landed.</p>
 
       <h3>Voice / TTS</h3>
       <p>Paste or type a script and generate speech. Skales auto-detects your available TTS provider: Local (OS voices), ElevenLabs, Azure Neural TTS, Groq TTS, OpenAI TTS, or Google TTS. Preview in-app, then download as MP3.</p>
 
       <h3>Music Generation</h3>
       <p>Generate AI music via Meta MusicGen (HuggingFace). Select genre, mood, and duration. Preview and download the result directly from the Studio interface.</p>
+      <p>A track made by the agent comes back measured: its length, the tempo it really plays at, the first downbeat, the drop and the bar-exact length it loops at. A generated track rarely keeps the tempo it was asked for, so a film is cut to these numbers rather than to the prompt, and a track that is too short is extended by looping it on the bar. Tracks longer than 30 seconds use Lyria 3 Pro on OpenRouter unless you choose another model.</p>
 
       <h3>Gallery</h3>
       <p>Every Studio output — images, videos, audio — is automatically saved to your Gallery. Filter by type, search by prompt, or browse the masonry grid. Click <strong>Reuse</strong> on any entry to jump back to the generating tab with the prompt and preview restored so you can continue iterating.</p>
@@ -2510,6 +2643,9 @@
       <p>On the phone, Film works the same way with the same moves, and generates through the video key on the phone (fal.ai under Integrations, or an OpenRouter key under Provider). With no key it says so rather than producing an animation and calling it a film.</p>
       <h3>A launch video, from Skales Code</h3>
       <p>Type <code>/launch</code> in a Code session &mdash; add a tone such as polished or cinematic, or a format such as vertical for reels &mdash; and Flow builds a short launch video from the project itself: its name, its words, its colours, fonts, screens and logo. Environment files, keys and secret folders are never read. The video renders and a post text is written beside it. The same works from any chat, in words, without opening Code first, and Flow has a Launch video template for starting the same way from the Templates tab.</p>
+      <h3>Real takes of Skales itself</h3>
+      <p>A film or a tutorial about Skales can show the real app instead of mock-ups. Ask for it in words &mdash; &ldquo;show the theme switching from light to dark, then Flat&rdquo;, &ldquo;record the Chat answering a question&rdquo; &mdash; in Flow, in the chat or in Skales Code. Skales starts a <strong>second copy of itself</strong> in the background on a free port, with a demo profile of its own beside your data folder: a copy of your settings with remote access, the public feed, telemetry, channel bots and autostarts switched off. It clicks through that copy like a person would (the moon button for light and dark, Settings &rsaquo; General &rsaquo; Appearance for the skin), films it, and keeps sharp still pictures along the way. Your own window, your desktop and your conversations are never filmed or touched.</p>
+      <p>The take lands in the project's <code>captures</code> folder as an MP4 at 30 frames per second, the same take as a numbered picture sequence, the stills, and a <code>capture.json</code> that says when each step happened in the video &mdash; so Flow can place it as a layer and cut on the moment the theme turns dark. The second copy is closed when the take is done, when a step fails or when you press Stop. This is a desktop feature; the phone app has no second copy to record.</p>
       <h3>When it asks you something first</h3>
       <p>A brief that leaves essential decisions open can come back with a handful of <strong>scoping questions</strong> — a short clickable form in the preview rather than a paragraph asking you to reply in prose. It only does this when you chose to be asked: leave the composer on its normal setting and Flow gets on with it and shows you a result you can then correct.</p>
 
@@ -2519,6 +2655,8 @@
       <p>There are ready-made building blocks the composition uses instead of inventing one every time — caption, lower third, title card, stat pill, chapter marker, progress bar — and six scene transitions beyond the ones that were there: wipe, wipe up, blur through, push, push up, cross zoom.</p>
       <p><strong>It is read before it is rendered.</strong> A clip that starts after the video ends, a layer that does not exist, an animation aimed at nothing, an audio file that was never downloaded: each is named in plain words and sent back to be fixed, instead of producing a video with something silently missing from it.</p>
       <p>A finished film can be shared straight to <a href="#discover" style="color:var(--accent)">Discover</a> from the export sheet.</p>
+      <p><strong>One film, every format.</strong> Ask for "9:16 and 16:9" and the composition is written once and rendered twice from the same timeline: <code>motion.mp4</code> and <code>motion-9x16.mp4</code> next to it (also 1:1, 4:5 or any size). Timing stays shared, only the layout changes; in the vertical cut, a recording of an interface is always shown as the whole window, never cropped. The render card lists every file.</p>
+      <p><strong>It looks at its own film.</strong> Before calling a film done, the assistant can check it the way an editor would: contact sheets of every format, a scan of every frame for a picture that flashes for one frame, the soundtrack as waveform and spectrum with its loudness, and the layout rules (no text cut off at the edge, headings well inside the 16:9 frame, subtitles at least 200 px above the bottom, no overlapping text). It sees those pictures, fixes what it finds and renders only the seconds that changed instead of the whole film again. Recordings of the Skales interface, any video or a folder of pictures can be laid into a film as their own layer, slowed down or cut around a moment. The same works from Chat and Code with <code>render_motion</code>, <code>check_motion</code> and <code>add_motion_take</code> on any folder with a composition.</p>
 
       <h3>E-Learning: a course for Moodle and every other LMS</h3>
       <p>Choose <strong>E-Learning</strong> in the composer, or the course template in the E-Learning block of the Templates tab, and describe the course: audience, topic, length. Flow writes the slides and the narration per slide; the frame around them is always the same, and it is Skales&rsquo;s: a contents list that keeps what has not been reached locked, progress, sound, subtitles, a transcript, help, keyboard and screen-reader support, and the exercises &mdash; cards to turn, points on a picture, sorting into groups, putting steps in order, quizzes whose wrong answers explain the thinking error, gaps to fill. A learner moves on once a slide has been heard or read in the transcript and its task is done, and a course left halfway opens again on the same slide.</p>
@@ -2573,6 +2711,8 @@
         <li><strong>Runway</strong>, <strong>Replicate</strong> and <strong>fal</strong>.</li>
         <li><strong>Through a gateway.</strong> OpenRouter video, and Skales IQ video on the trial.</li>
       </ul>
+
+      <p>Every generated clip runs as a background job. The provider&rsquo;s job number is saved the moment the provider hands it out, so if Skales restarts while a clip is rendering, the clip is collected afterwards instead of being ordered and paid for again. Several clips for one film can render side by side, and nothing cuts a slow clip short. The fast tier is the default (Veo 3.1 Fast); ask for the full model by name for a final take.</p>
 
       <div class="tip"><strong>Not every video needs a model.</strong> Studio's own renderer makes motion graphics, counters, slideshows and kinetic typography with no generation and no key at all, frame by frame through FFmpeg. See <a href="#studio">Skales Studio</a>, and <a href="#studio">Type</a> for the text one.</div>
     </section>
@@ -2783,6 +2923,7 @@
       <h2><span class="icon">🔊</span> Narration</h2>
       <p>Skales turns a text or a whole course into narrated audio files with the voice <em>you</em> choose: the one set under <strong>Settings &rsaquo; Voice</strong>, or any other you have set up &mdash; OpenRouter&rsquo;s speech models and its audio models, ElevenLabs, Azure, OpenAI, the offline voice on this computer, and the rest. Ask it to play the same sentence in a few voices first and choose by ear.</p>
       <p>Long texts are voiced in short parts and joined with short pauses, and every join is checked for clicks. You get an mp3 (or wav) per slide, subtitles whose times come from the audio itself, and a transcript. A word can be spoken differently from how it is written &mdash; the caption says &ldquo;PDF&rdquo; while the voice says it the way your listeners do. When you change a slide, only that slide is voiced again. A long course runs in the background, keeps going if you close the window, and continues after a restart. The cost is shown when a provider reports it.</p>
+      <p>A script with several speakers is one request: each line can carry its own voice and its own direction (a narrator and a side character on OpenRouter&rsquo;s gpt-audio, for example). Every line comes back with its length and the measured start of each spoken phrase, so a cut or a caption can land on the word. A tempo factor makes the read brisker or calmer without changing the pitch, and long pauses inside a line can be shortened to a limit you set. When an audio model says a line differently from the script, the reply names what it actually said.</p>
     </section>
 
     <section id="own-speech">
@@ -2797,8 +2938,8 @@
       <h3>A full agent (v11.3.2 &ldquo;Re-Buddy&rdquo;)</h3>
       <p>The buddy runs the complete multi-step agent loop &mdash; with the same generous working budget as the WhatsApp/Telegram channels. Ask it to clean a folder, send a mail, check your calendar: it works until the task is done, and the speech bubble shows <strong>live progress lines</strong> as each step finishes. It speaks with your configured persona, in your language, recalls what it knows about you, and keeps its <strong>own conversation thread</strong> &mdash; &ldquo;Open Chat&rdquo; jumps straight to it.</p>
 
-      <h3>Skins &amp; custom pixel pets</h3>
-      <p>Three classic WebM skins (Skales, Bubbles, Capy) in <strong>Settings → General → Desktop Buddy → Buddy Skin</strong>. Below them: <strong>Custom pixel skins</strong> &mdash; animated pixel pets in the open <a href="https://petdex.dev" target="_blank" rel="noopener">Petdex</a> sprite format. Three Skales originals ship built in, any pet from the petdex.dev gallery imports with one paste (URL or name), and the <strong>&ldquo;+&rdquo; card opens the pet creator</strong>: pick shape, color, eyes, ears, tail and an accessory, watch the live preview, save &mdash; rendered locally in seconds, no image model. You can also just tell Skales in chat: <em>&ldquo;make me a purple octopus buddy&rdquo;</em>. The pixel pet reacts to your agent: it inspects while Skales thinks, waits during approvals, slumps on errors, jumps when the task lands.</p>
+      <h3>Buddy skins</h3>
+      <p>Choose Skales, Bubbles or Capy in <strong>Settings → General → Desktop Buddy → Buddy Skin</strong>.</p>
 
       <h3>Approve / Decline &mdash; and it keeps going</h3>
       <p>When Skales needs confirmation before an action (in Safe Mode), the Buddy shows approve/decline buttons in the bubble. Since v11.3.2, approving <strong>continues the task</strong> with the remaining step budget instead of ending the turn &mdash; multi-step jobs ask again when the next gated step comes up.</p>
@@ -2989,6 +3130,11 @@
     <section id="schedule">
       <h2><span class="icon">⏰</span> Schedule</h2>
       <p>One job store, one clock. A job is anything Skales runs without you watching: a prompt, a goal, a workflow, a playbook, a team run or a plugin job. Every job lives in the same list, follows the same failure rule (three failures in a row pause it, and it says so) and shows up on the Cockpit board while it runs.</p>
+
+      <h3 id="blueprints">Blueprints: ready-made automations</h3>
+      <p>Open <strong>Schedule &rarr; Blueprints</strong> for sixteen automations that only need a few answers: important-mail watch, news digest, morning brief, weekly review, a repeating reminder, price, competitor, content and community watch, bills and renewals, a task check, a team update, a data comparison, system health, a learning digest, and one you describe yourself. Pick one, answer its questions, choose how often it runs, and choose where each result goes besides the app: your paired phone, Telegram, WhatsApp or email.</p>
+      <p>What you get is an ordinary job in the list below, marked <em>Blueprint</em>. Pause it, run it now, delete it or open its answers again with the pencil. Asking for the same automation twice keeps the one you have. If a blueprint needs something that is not set up yet, such as a mailbox, the card says so with a link to the right place in Settings, and nothing is created until it is.</p>
+      <p>The same catalogue is in the chat: type <code>/blueprint</code> for the list, or <code>/blueprint price watch</code> and Skales asks the questions in the conversation. Skales Mobile shows the same blueprints and the same jobs through your paired computer. Blueprints run on local models as well.</p>
 
       <h3>What fires a job</h3>
       <table>
@@ -3197,6 +3343,8 @@
       <p><strong>+ Custom endpoint</strong> is a tile in the same grid: it opens the extra OpenAI-compatible endpoints (LM Studio, llama.cpp, vLLM, koboldcpp, a second local server) right under the cards. The same door sits inside the Custom endpoint card itself, as <strong>+ Add another endpoint</strong>, so you do not have to scroll back up to the grid to add a second one. Each extra endpoint has its own <strong>Set Active</strong> button, so any of them can be the provider Skales routes to by default, not only one you pick per chat.</p>
       <p>A model you type into a provider card yourself &mdash; which is the only kind the Custom endpoint has &mdash; is searchable in the chat model picker like any other. You do not have to make the provider active first to reach its model.</p>
       <p>Two ticks on a custom endpoint answer two different questions, and they are separate on purpose. <strong>This endpoint runs on my own machine</strong> decides privacy and where the work happens. <strong>Lean prompt</strong>, next to it, decides the size of what you pay for: with it on, Skales sends a shorter system prompt and a capped tool set and fetches the rest on demand; with it off, every tool rides on every request. It follows the tick above by default — on for an endpoint on your machine, off for a hosted one — and can be set either way per endpoint, per provider, or per model in an <a href="#llm-profiles" style="color:var(--accent)">LLM Profile</a>. Turn it on for a metered key.</p>
+      <p>Every custom endpoint also names the <strong>Protocol</strong> it speaks: <strong>OpenAI Chat Completions</strong> (<code>/v1/chat/completions</code>, the default, and what every endpoint saved before the choice existed keeps), <strong>Anthropic Messages</strong> (<code>/v1/messages</code>, the key goes as <code>x-api-key</code>) or <strong>OpenAI Responses</strong> (<code>/v1/responses</code>). Skales then talks to it exactly as it talks to Anthropic or OpenAI themselves: tools, streaming, the effort dial and the long wait while a model thinks all follow the protocol, and so do the model list and the test. The address can be pasted in any form the provider's page shows: with or without <code>https://</code>, with or without <code>/v1</code>, with a trailing slash, or as the full endpoint path. Skales reads them all as the same server.</p>
+      <p><strong>Test connection</strong> on each endpoint sends one short real turn in its protocol and draws the connection map under it: the address, the server, the model list, the model, tool calls and the reply, with the first link that breaks named in a sentence. It tests what the card holds right now, saved or not. Fetch models uses the key typed into the endpoint as well, and reads a paged catalogue to its end. An endpoint that would answer exactly like one already in the list (same server, protocol and model) is named before it is saved, so the same service does not end up listed twice.</p>
       <p>Each card carries its own <strong>Timeout, retries and model limits</strong> block, folded shut until you need it. Fallback chain, advisor strategy and per-mode overrides live together in one collapsed <strong>Advanced Routing</strong> section at the bottom of the page. The ChatGPT (Codex) subscription sits inside the OpenAI card, since that is the account it belongs to.</p>
 
       <div class="provider-list">
@@ -3325,7 +3473,7 @@
         <div class="provider-item">
           <div class="provider-dot muted"></div>
           <div class="provider-name">Custom Endpoint</div>
-          <div class="provider-desc">Connect any OpenAI-compatible API — llama.cpp, vLLM, koboldcpp, or any local server. Add as many as you need, each with its own Set Active. One endpoint is not one model: press <strong>Fetch models</strong> on its card and Skales asks the server what it serves, keeps the answer, and offers every one of those models under that endpoint’s name — in the card, in the chat model picker, in model search and in the model field of an agent. Typing a model id by hand still works, for a server that answers with one it does not list.</div>
+          <div class="provider-desc">Connect any OpenAI-compatible API — llama.cpp, vLLM, koboldcpp, a router such as Tetrate, or any local server — or an endpoint that speaks Anthropic Messages or OpenAI Responses, chosen per endpoint. Add as many as you need, each with its own Set Active. One endpoint is not one model: press <strong>Fetch models</strong> on its card and Skales asks the server what it serves, keeps the answer, and offers every one of those models under that endpoint’s name — in the card, in the chat model picker, in model search and in the model field of an agent. Typing a model id by hand still works, for a server that answers with one it does not list.</div>
         </div>
       </div>
 
@@ -3355,6 +3503,7 @@
 
       <h3 id="regional">Which providers work where</h3>
       <p>Skales runs on your machine and talks to whichever provider you configure, so what is reachable from your country is decided by that provider, not by Skales. This matters most for the recommended default: <strong>OpenRouter does not serve every country</strong>, and where it does not, its key will not work no matter how it is entered. Nothing about Skales itself is limited by where you are.</p>
+      <div class="tip"><strong>&ldquo;401 User not found&rdquo; on every call?</strong> That is an OpenRouter <em>management</em> key: it can create and manage keys but cannot call a model. Skales recognises it (the key test in Settings asks OpenRouter what the key is) and tells you to create a normal API key at openrouter.ai/settings/keys. An empty balance (402) is named the same way, in the chat, in the tool result and in Settings.</div>
       <p>If OpenRouter is not available to you, every one of these is a full replacement &mdash; they are ordinary providers in the same grid, with the same tools, vision and agent features:</p>
       <ul style="margin: 0.75rem 0 1rem 1.5rem; color: var(--muted); font-size: 0.875rem;">
         <li style="margin-bottom: 0.5rem;"><strong style="color:var(--text)">DeepSeek</strong>, direct rather than through a gateway. Own account, own key, reasoning models included.</li>
@@ -3382,6 +3531,10 @@
         <tr><td><code>/model &lt;id&gt;</code> in the composer</td><td>The same per-chat switch. The provider is worked out from the model, and if more than one of your providers serves it, Skales asks which one rather than guessing.</td></tr>
         <tr><td>Settings &rsaquo; AI Providers &rsaquo; the provider's card</td><td>Your default, for new conversations. It does not reach into a conversation that already carries its own choice.</td></tr>
       </table>
+
+      <h3>The effort dial</h3>
+      <p>A model that can think harder or less hard carries an effort choice in its model pill: in the chat, in Skales Code and in the toolbar of a Flow project, where the model pill comes first and the controls wrap onto a second row rather than hiding past the edge of a narrow chat pane. Whether a Claude model takes an effort level, and which levels, is read from Anthropic&rsquo;s own model list after <strong>Fetch models</strong> (also for your own endpoint speaking Anthropic Messages), so a model without effort shows none and a level the model does not have is never sent. The chosen level reaches the model even in a plain chat where no model is picked in the composer: the conversation then runs on your default provider at the effort you set, not at the model&rsquo;s own default.</p>
+      <p>While a model thinks it can stay silent for a long time. Claude from 3.7 on, GPT-5 and later and o4 get a long silence window and a longer call budget on every route (the Anthropic key, OpenRouter, in Chat, Flow and Code), and any request sent with an effort level counts as a thinking request, so a quiet minute of reasoning is no longer reported as a stalled stream.</p>
 
       <h3>Context windows</h3>
       <p>The size of a model's window comes from the same catalogue Skales already downloads for the model lists, not from a built-in guess. Both the readout and the automatic shortening of a long conversation use that figure, and so does compacting a conversation by hand. On a model with a very large window this is the difference between shortening at an eighth of the real budget and shortening when it is actually needed.</p>
@@ -3571,6 +3724,7 @@
         <li style="margin-bottom: 0.4rem;"><strong style="color: var(--text)">API Key:</strong> there is no key field — LM Studio is keyless, like Ollama</li>
       </ul>
       <p>Click <strong>Fetch Models</strong>. Skales asks your running server what it has loaded; there is no built-in model list for LM Studio, so everything in the picker comes from your own machine. The full walkthrough is on the <a href="setup-lmstudio.html" style="color:var(--accent)">LM Studio setup page</a>.</p>
+      <p><strong>Test Connection</strong> draws the <strong>connection map</strong> for every local or custom provider: Skales, address, server, model, context, tools, test turn, with arrows between them. Each link says whether it passed, why not, and what to do; the card turns green only when a real test turn comes back, never because a model list did. A chat error from such a provider has a <strong>Check connection</strong> button that opens the same map in place, and the diagnostics report carries it too. Running LM Studio or Skales inside WSL2: <a href="setup-lmstudio.html#wsl2" style="color:var(--accent)">Windows with WSL2</a>.</p>
 
       <div class="tip"><strong>💡 Tip:</strong> LM Studio has a friendly UI for model management and inference parameters. Great for beginners or users who prefer a visual interface.</div>
     </section>
@@ -4194,6 +4348,7 @@
         <a href="#timezone">Time zone and location</a>
         <a href="#themes">Themes</a>
         <a href="#accents">Your own accent colours</a>
+        <a href="#background">Background and own picture</a>
         <a href="#deep-links">skales:// links</a>
         <a href="#notifications">Notification Center</a>
         <a href="#dashboard">Dashboard</a>
@@ -4234,6 +4389,18 @@
       <h2><span class="icon">🎨</span> Your own accent colours</h2>
       <p>Under <strong>Settings &gt; General &gt; Appearance</strong> you can set the three accent tones Skales uses for buttons, links, glows and selections. Skales keeps them readable rather than taking them literally: a tone that would leave text unreadable on your theme is adjusted in brightness until it is, so a colour you like cannot turn a label into a rumour.</p>
       <p>One thing accents never touch: the Skales lettering in the sidebar keeps its own colours in every theme, because that is the brand, not a control. Skales Code follows the same accents and the same light or dark as the app, and changes the moment you change it.</p>
+    </section>
+
+    <section id="background">
+      <h2><span class="icon">🖼️</span> Background pattern, colour and your own picture</h2>
+      <p>The Skales X theme paints a background behind the main window. Under <strong>Settings &gt; General &gt; Appearance</strong>, right under <strong>Background animation</strong>, you choose what it is made of:</p>
+      <ul>
+        <li><strong>Pattern</strong>: Circles (the drifting gradients Skales ships with), Honeycomb, Waves, Dots, Contours or Plain. Every pattern is painted in your accent colours. Circles and Waves move only while Background animation is on, and stand still when your system asks for reduced motion.</li>
+        <li><strong>Background colour</strong>: tints the light or dark base. It is mixed into the base rather than painted raw, so text stays readable in both modes.</li>
+        <li><strong>Background picture</strong>: pick one of the pictures that come with Skales from their small previews - <strong>Desert (auto)</strong> shows Desert Day while the app is light and Desert Night while it is dark, or choose <strong>Desert Day</strong> or <strong>Desert Night</strong> to keep one - or any PNG, JPEG, WebP, GIF or AVIF from your disk with <strong>Choose picture</strong>. Your own picture is stored as a file in the Skales data folder and stays available as <strong>Your picture</strong> while you try the others. The picture lies behind the whole window, the sidebar included. <strong>Dim</strong> fades it towards the background, <strong>Blur</strong> softens it, and <strong>Overlay colour</strong> tints it in your accent until you pick another colour. <strong>Remove</strong> turns the picture off (your own picture's file goes with it).</li>
+        <li>A new installation starts on Desert (auto). During setup, the look step shows a <strong>Desert background</strong> switch while Skales X is chosen: turn it off, or finish setup on another theme, and the installation starts without a picture. What counts is the choice at the end of setup. An updated installation keeps the background it had.</li>
+      </ul>
+      <p>The picture belongs to the main window only: Flow and Skales Code keep their own surfaces. The blur is drawn once, so a softened picture costs nothing while you work. Classic and Flat keep their own flat background.</p>
     </section>
 
     <section id="deep-links">
@@ -4565,7 +4732,7 @@
       <p><strong>The System button in the foot of the sidebar &rsaquo; Diagnose</strong> is the running record of what this install has been doing - the turns, the tool calls and the errors as they came, in order. It is the place to look when something behaved oddly a minute ago and you want to see it rather than reconstruct it.</p>
 
       <h3>Diagnostics</h3>
-      <p><strong>Settings &rsaquo; Advanced &rsaquo; Diagnostics</strong> is the summary you can hand to somebody else. Press <strong>Show recent crashes and errors</strong> and the card fills with what this machine recorded: the build and the hardware, crashes, every provider call that failed in this session, recent warnings, and the update log, so a failed update can be shown instead of described. <strong>Copy</strong> puts the same text on the clipboard for a bug report.</p>
+      <p><strong>Settings &rsaquo; Advanced &rsaquo; Diagnostics</strong> is the summary you can hand to somebody else. Press <strong>Show recent crashes and errors</strong> and the card fills with what this machine recorded: the build and the hardware, crashes, the connection map of your local and custom providers, every provider call that failed in this session, recent warnings, and the update log, so a failed update can be shown instead of described. <strong>Copy</strong> puts the same text on the clipboard for a bug report.</p>
       <p>Nothing here is transmitted anywhere. It is read off this machine and shown to you. You can also just ask in a chat - Skales reads the same report itself, so &ldquo;why did that fail&rdquo; is answerable without you opening anything.</p>
       <p>When you are ready to send it on, see <a href="#feedback" style="color:var(--accent)">Feedback &amp; Reports</a>.</p>
     </section>
@@ -4580,7 +4747,7 @@
     </section>
 
     <footer>
-      <span>Skales v<span data-skales-version>12.9.46</span> &middot; © 2024-2026 Mario Simic &middot; Proprietary licence</span>
+      <span>Skales v<span data-skales-version>12.9.50</span> &middot; © 2024-2026 Mario Simic &middot; Proprietary licence</span>
       <a href="https://skales.app">skales.app</a>
     </footer>
 
