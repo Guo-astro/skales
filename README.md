@@ -30,24 +30,26 @@ The private AI that lives on your computer and does real work, not just chat.
   </p>
 <br>
 
+<h3>🎨 Make it yours</h3>
+
 <table>
   <tr>
-    <td align="center"><img src="docs/readme/pattern-circles.jpg" width="280" alt="Circles background" /><br><sub>Circles</sub></td>
-    <td align="center"><img src="docs/readme/pattern-honeycomb.jpg" width="280" alt="Honeycomb background" /><br><sub>Honeycomb</sub></td>
-    <td align="center"><img src="docs/readme/pattern-waves.jpg" width="280" alt="Waves background" /><br><sub>Waves</sub></td>
+    <td width="33%" valign="top"><b>Backgrounds</b><br><sub>Circles, Honeycomb, Waves, Dots, Contours or Plain in your accent colours, a background colour, Desert Day and Night, or your own picture with dim, blur and an overlay tint.</sub></td>
+    <td width="33%" valign="top"><b>Light, dark, your colours</b><br><sub>Three looks (Skales X, Classic, Flat), light and dark, and an accent gradient you pick yourself.</sub></td>
+    <td width="33%" valign="top"><b>Calm or Power</b><br><sub>A quieter dashboard or every widget at once, plus an effort dial for models that can think longer.</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/readme/pattern-dots.jpg" width="280" alt="Dots background" /><br><sub>Dots</sub></td>
-    <td align="center"><img src="docs/readme/pattern-contours.jpg" width="280" alt="Contours background" /><br><sub>Contours</sub></td>
-    <td align="center"><img src="docs/readme/pattern-plain.jpg" width="280" alt="Plain background" /><br><sub>Plain</sub></td>
+    <td valign="top"><b>Typing suggestions</b><br><sub>The composer offers the rest of your sentence as you type; Tab takes it.</sub></td>
+    <td valign="top"><b>Word, Excel, PowerPoint, Outlook, Chrome</b><br><sub>Skales as a task pane in Office and a side panel in Chrome, paired once in Settings → Extensions.</sub></td>
+    <td valign="top"><b>Your own models</b><br><sub>15+ providers, local models, or any endpoint that speaks Chat Completions, Anthropic Messages or OpenAI Responses.</sub></td>
   </tr>
 </table>
 
-<p><sub>Make it yours under <b>Settings > General > Appearance</b>: six patterns painted in your accent colours, the shipped <b>Desert Day</b> and <b>Desert Night</b> pictures, or a picture of your own behind the whole window, with Dim, Blur and an Overlay colour.</sub></p>
-
 <p align="center">
-  <img src="docs/readme/theme-switch.gif" width="720" alt="Skales switching between light and dark" />
+  <img src="docs/readme/patterns.gif" width="49%" alt="The six Skales X background patterns" />
+  <img src="docs/readme/theme-switch.gif" width="49%" alt="Skales switching between light and dark" />
 </p>
+<p align="center"><sub>Settings → General → Appearance</sub></p>
 <br>
 
 </div>
@@ -244,7 +246,7 @@ Skales remembers you across every surface you talk to it on - the desktop chat, 
 
 <p align="center">
   <a href="https://play.google.com/store/apps/details?id=app.skales.mobile">
-    <img src="docs/readme/mobile-home-light.jpg" alt="Skales Mobile home screen in the light theme" width="320">
+    <img src="docs/readme/mobile-banner.jpg" alt="Skales on your phone: chat, voice and Studio on Android and iOS" width="100%">
   </a>
 </p>
 
