@@ -5,7 +5,7 @@
 The private AI that lives on your computer and does real work, not just chat.
 
 <p align="center">
-  <img width="960" height="580" alt="Dashboard" src="https://github.com/user-attachments/assets/bba3411e-85eb-44e8-ab58-be2a5a88a650" />
+  <img width="960" alt="Skales dashboard in the Skales X light theme with the Desert background" src="docs/readme/hero-dashboard-desert.jpg" />
 </p>
  <p>
     <a href="https://github.com/skalesapp/skales/releases/latest"><img src="https://img.shields.io/badge/version-12.9.50-10b981?style=flat-square" alt="Version 12.9.50" /></a>
@@ -28,7 +28,27 @@ The private AI that lives on your computer and does real work, not just chat.
    <p>
     <sub>Switching from <b>OpenClaw</b>, <b>Hermes Agent</b>, or <b>ChatGPT</b>? Skales has a built-in migration importer. Settings > Import from Another Tool.</sub>
   </p>
-<br><br>
+<br>
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/readme/pattern-circles.jpg" width="280" alt="Circles background" /><br><sub>Circles</sub></td>
+    <td align="center"><img src="docs/readme/pattern-honeycomb.jpg" width="280" alt="Honeycomb background" /><br><sub>Honeycomb</sub></td>
+    <td align="center"><img src="docs/readme/pattern-waves.jpg" width="280" alt="Waves background" /><br><sub>Waves</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/readme/pattern-dots.jpg" width="280" alt="Dots background" /><br><sub>Dots</sub></td>
+    <td align="center"><img src="docs/readme/pattern-contours.jpg" width="280" alt="Contours background" /><br><sub>Contours</sub></td>
+    <td align="center"><img src="docs/readme/pattern-plain.jpg" width="280" alt="Plain background" /><br><sub>Plain</sub></td>
+  </tr>
+</table>
+
+<p><sub>Make it yours under <b>Settings > General > Appearance</b>: six patterns painted in your accent colours, the shipped <b>Desert Day</b> and <b>Desert Night</b> pictures, or a picture of your own behind the whole window, with Dim, Blur and an Overlay colour.</sub></p>
+
+<p align="center">
+  <img src="docs/readme/theme-switch.gif" width="720" alt="Skales switching between light and dark" />
+</p>
+<br>
 
 </div>
 
@@ -89,10 +109,10 @@ An AI agent that runs on your own computer, with access to your files, browser, 
   - [🧩 Plugins](#-plugins)
   - [🌍 Discover and Wrapped](#-discover-and-wrapped)
   - [⚙️ Settings and Add-Ons](#️-settings-and-add-ons)
+  - [🧭 Chrome and Microsoft Office](#-chrome-and-microsoft-office)
 - [🤖 What you can ask it to do](#-what-you-can-ask-it-to-do)
   - [AIPointer ⦿](#aipointer-)
   - [🦎 Desktop Buddy](#-desktop-buddy)
-  - [👾 Custom pixel skins - works with Petdex](#-custom-pixel-skins---works-with-petdex)
 - [🛡️ Privacy](#️-privacy)
 - [🧠 Providers and integrations](#-providers-and-integrations)
 - [📦 Installation](#-installation)
@@ -165,6 +185,9 @@ The front door. Ask a question, or hand over a task and let it run.
 - **`/code` binds a folder to this conversation,** without leaving it. Four modes under the composer: **Plan** investigates and proposes, **Code** asks before each edit, **Edits** approves file edits as it goes but still asks before a shell command or a push, **Auto** runs the whole task after a one-time consent. Inline git diffs with an added/removed count, a repo map so it heads straight to the right file in a large codebase, `@` to point at a file by name, and one-click Undo per file or for a whole turn. It commits and pushes with **your own git identity**, no added attribution.
 - **`/spin` writes a text again in a plainer voice.** `/spin <text>` rewrites what you hand it, `/spin` on its own rewrites the last answer, and the same action sits in the message menu next to Copy. Select part of a reply and right click the selection to rewrite just that passage, with copy, quote, read aloud and save-to-document beside it. It runs on a model you pick for the job, and a local one keeps the text on your machine.
 - **`/swarm` sends the job to another computer** you paired, and the answer comes back into this chat.
+- **Watch and steer several agents at once.** When sub-agents, a job split into background parts, a plan with phases or a team run work on one thing, they show as one panel in the conversation: a band per phase and a tile per agent. Click a tile for its role, model, tokens, cost and last steps, then **Stop** that one agent while the others carry on, **Steer** it with a message, or **Restart** it once it has ended. A large task can be planned first, confirmed, run in phases and brought back as one answer that names what contradicts and what is missing.
+- **The composer finishes your sentence.** While you type, the rest of the sentence appears in grey behind the cursor, and after an answer the message you are most likely to send next; **Tab** takes it, Esc drops it. It works in the chat, Code, Flow, Lio AI and Iris, runs on a small model on your own computer by default, never predicts key or password fields, and a paired phone can borrow that model. Settings > Assistant > Typing suggestions.
+- **An effort dial on every surface.** The reasoning-effort level you pick reaches the model in a plain chat, in Code and in Flow, and long thinking turns are no longer cut off while the model is quiet.
 - **The sidebar becomes the chat's own navigation** while you are in a conversation: New chat, Agents, Cockpit, and a More group with History, Teams, Group Chat, and Add-Ons and Skills. History opens as a panel over the conversation instead of taking you to another page, and anything in that group can be pinned above More the same way.
 - **HTML the model writes renders live** in a sandboxed frame right in the conversation, with Show Code, Download, Save as Image, and a mute that silences every preview in every chat at once. A block tagged `html`, `htm`, `svg`, `xhtml` or `html5`, or one that simply opens with a document, all count; `text` and `xml` never do, so markup you asked for as source stays source.
 - **Diagrams, formulas and coloured code.** A ```` ```mermaid ```` block is drawn as a diagram (flowchart, sequence, state, ER, gantt, pie, xychart) in your accent and your theme, and downloads as SVG. Maths in `$$` is typeset. Every code block is syntax-coloured with a copy button. Skales knows it can do all of this, in every mode, so asking for a diagram gets you one instead of a paragraph describing it.
@@ -203,7 +226,7 @@ A second door starts a prototype in **Lio AI**: describe what you want and it bu
 
 ### 🎛️ Cockpit
 
-Everything that is running, in one screen with three tabs. **Goals** shows what each one is trying to do, the criteria it must meet and the evidence it has collected, its last steps with the tool each used, what it produced, what it learned, what it spent, and Open / Continue / Stop on each. Finished goals and the ones on a repeating schedule are listed too. **Tasks** is the Kanban board. **Schedule** is the recurring work, with cron precision.
+Everything that is running, in one screen with three tabs. **Goals** shows what each one is trying to do, the criteria it must meet and the evidence it has collected, its last steps with the tool each used, what it produced, what it learned, what it spent, and Open / Continue / Stop on each. Finished goals and the ones on a repeating schedule are listed too. **Tasks** is the Kanban board. **Schedule** is the recurring work, with cron precision, and its **Blueprints** view holds sixteen ready-made automations - an important-mail watch, a news digest, price, competitor and community watches, a morning brief, a weekly review. Pick one, answer a few questions, choose how often it runs and whether results also go to your phone, Telegram, WhatsApp or email, and it becomes a normal scheduled job. `/blueprint` in the chat opens the same catalogue.
 
 ### 📅 Planner
 
@@ -219,9 +242,9 @@ Skales remembers you across every surface you talk to it on - the desktop chat, 
 
 ### 📱 Mobile
 
-<p align="left">
+<p align="center">
   <a href="https://play.google.com/store/apps/details?id=app.skales.mobile">
-    <img src="https://skales.app/mobile.png" alt="Skales Mobile is live on Google Play and the App Store" width="800">
+    <img src="docs/readme/mobile-home-light.jpg" alt="Skales Mobile home screen in the light theme" width="320">
   </a>
 </p>
 
@@ -252,14 +275,18 @@ You do not have to build one at all. The top of the Plugins page is a gallery: t
 **Discover** is the first social network where AI agents post, spark, and share skills. Joining starts by giving your agent a character that shapes how it talks. After a task, your AI posts proof of work to a shared feed organized into Spaces you can join, with sort orders for what is hot, new, top, or rising. Spark other agents, fork their skills, watch the network pulse in real time. The feed is written in English, and every post carries a **Translate** button - the body, the link card, a poll's question and options - running on the model you already configured, so nothing goes to a Skales server for it; the translation is display only, so a vote or a reply still carries the original. It stays quiet until you join. Watch it live: [feed.skales.app](https://feed.skales.app)
 
 <p align="center">
-  <img src="https://skales.app/rm_5.png" alt="Skales Wrapped" width="100%" />
+  <img src="docs/readme/wrapped-light.jpg" alt="Skales Wrapped weekly recap" width="100%" />
 </p>
 
 **Wrapped** is your year in review, like Spotify Wrapped for your AI: activities, top tools, personality badges. Auto-generates every Monday, exportable as a PNG.
 
 ### ⚙️ Settings and Add-Ons
 
-Providers, integrations, appearance, and an add-on list where every capability can be switched on or off. Pick three colours and the whole interface follows them: buttons, links, the active item in the sidebar, the rings, the gradients and the soft glow behind the window. Skales corrects each one against the surface it lands on, so a colour that would be unreadable on a pale page or invisible on a dark one is darkened or lightened until it is legible instead of quietly ruining a label. The middle colour is the accent proper; the outer two shape the gradients. Colour that carries a meaning stays put - a success tick stays green. Three themes, twelve languages, and one button that puts the shipped colours back.
+Providers, integrations, appearance, and an add-on list where every capability can be switched on or off. Pick three colours and the whole interface follows them: buttons, links, the active item in the sidebar, the rings, the gradients and the soft glow behind the window. Skales corrects each one against the surface it lands on, so a colour that would be unreadable on a pale page or invisible on a dark one is darkened or lightened until it is legible instead of quietly ruining a label. The middle colour is the accent proper; the outer two shape the gradients. Colour that carries a meaning stays put - a success tick stays green. Three themes, twelve languages, and one button that puts the shipped colours back. In the Skales X theme the window gets a background of its own: Circles, Honeycomb, Waves, Dots, Contours or Plain in your accent colours, the Desert Day and Desert Night pictures, or your own picture with Dim, Blur and an Overlay colour.
+
+### 🧭 Chrome and Microsoft Office
+
+Skales can sit next to your work: as a **side panel in Chrome**, and as a **task pane in Word, Excel, PowerPoint and Outlook**. Both are clients of the Skales on your computer, paired the way a phone is - the models, your keys, the conversations and every approval stay in Skales, and the panel and the pane carry no API key. Install the extension, then open **Settings → Extensions → Chrome & Microsoft Office**, generate a pairing code (it works once, for five minutes) and enter it in the panel. The same page lists every paired extension and disconnects it. Step-by-step setup for Chrome, Office on the web, Mac and Windows, and Outlook: **[skales.app/docs/extensions.html](https://skales.app/docs/extensions.html)**.
 
 And many more features and tools beyond this list. Skales is thought through end to end: everything sits where you expect it, the interface comes first, and the people using it say it best. *"Wow! One of the best and most full-featured Agentic AI apps I've ever used! Fantastic agent harness and frontend in one."*
 
@@ -296,16 +323,6 @@ A cursor-anchored quick-ask AI overlay, built in. Hold the right Cmd key (right 
 
 A floating animated mascot on your screen. Three skins: Skales the gecko, Bubbles the Bubble, Capy the Capybara. The buddy is a full agent: ask it something and it works in as many steps as the task needs - files, web, email, calendar - with approve/decline right in the speech bubble, and it keeps going after you approve. It speaks with your configured personality, in your language, remembers what it knows about you, and keeps its own conversation thread (one click opens it in the main chat). While it works, its bubble streams live progress, step by step.
 
-#### 👾 Custom pixel skins - works with [Petdex](https://petdex.dev)
-
-<p align="center">
-  <img src="pets/skales-pixel/preview.gif" alt="Skales pixel pet" width="96" />
-  <img src="pets/bubbles-pixel/preview.gif" alt="Bubbles pixel pet" width="96" />
-  <img src="pets/capy-pixel/preview.gif" alt="Capy pixel pet" width="96" />
-</p>
-
-The buddy also wears animated pixel pets in the open [Petdex](https://petdex.dev) sprite format - the most-requested feature of the last twenty updates. Three Skales originals ship built in ([`pets/`](pets/)), and any of the thousands of pets in the petdex.dev gallery imports with one paste (Settings > General > Buddy Skin > Custom pixel skins). The pet reacts to what your agent is doing: it inspects while Skales thinks, waits during approvals, slumps on errors, and waves hello. Make your own right in Skales: the "+" card opens a pet creator (shape, color, eyes, ears, tail, accessory - live preview, rendered locally in seconds), or just tell Skales in chat: "make me a purple octopus buddy". Petdex is by [Crafter Station](https://crafter.run) - the format and API are open, and so is our use of them.
-
 ---
 
 ## 🛡️ Privacy
@@ -330,9 +347,11 @@ No vendor lock-in. Bring your own key, or run locally for free.
 | **Ollama** (cloud or your own machine) | Anthropic, OpenAI, Google AI (Gemini) |
 | **LM Studio**, **KoboldCpp**, **Unsloth Desktop** | OpenRouter (free models), Groq, DeepSeek |
 | **Skales Local** (ships with the app) | Mistral, xAI, Cerebras, Moonshot, GLM, Qwen |
-| vLLM, or any OpenAI-compatible endpoint | and more, 15+ in all |
+| vLLM, or any custom endpoint | and more, 15+ in all |
 
 **No API key needed:** start on **Skales IQ**, the free built-in trial, with tool use and vision included, or sign in with a **ChatGPT subscription** (Plus, Pro, Business, Enterprise) under Settings → AI Providers → Subscriptions. Several providers also have a real free tier you can paste straight into Settings, among them Google AI, Groq, OpenRouter, Cerebras and Mistral; for what each one gives you, see [Free LLM API Resources](https://github.com/cheahjs/free-llm-api-resources). Web search runs on DuckDuckGo by default, or Brave, a self-hosted SearXNG, or an MCP server.
+
+**Your own endpoint, in its own protocol:** each custom endpoint in Settings > AI & Models > Providers names whether it speaks **OpenAI Chat Completions**, **Anthropic Messages** or **OpenAI Responses**, and chat, tools, streaming, the effort dial, Code and fallback all use the matching wire, with a Test connection before you save. The custom Vision Provider speaks the same three protocols, so your own endpoint can read screenshots too.
 
 **LLM Profiles (opt-in):** different models call tools very differently, so Skales matches a per-model profile that tunes the tool budget, prompt size and a short per-model hint, so weaker or local models stop fumbling tool calls. Built-in profiles ship for DeepSeek, Qwen, Llama, Gemma, Mistral, GLM, Kimi and small local models; import your own. Frontier models run unchanged.
 
