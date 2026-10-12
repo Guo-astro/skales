@@ -46,8 +46,10 @@ The private AI that lives on your computer and does real work, not just chat.
 </table>
 
 <p align="center">
-  <img src="docs/readme/patterns.gif" width="49%" alt="The six Skales X background patterns" />
-  <img src="docs/readme/theme-switch.gif" width="49%" alt="Skales switching between light and dark" />
+  <img src="docs/readme/patterns.gif" width="100%" alt="The six Skales X background patterns" />
+</p>
+<p align="center">
+  <img src="docs/readme/theme-switch.gif" width="100%" alt="Skales switching between light and dark" />
 </p>
 <p align="center"><sub>Settings → General → Appearance</sub></p>
 <br>
