@@ -704,7 +704,7 @@
       <div class="logo-mark">S</div>
       <div>
         <div class="logo-text">Skales</div>
-        <div class="logo-version">v<span data-skales-version>12.9.50</span> User Guide</div>
+        <div class="logo-version">v<span data-skales-version>12.9.55</span> User Guide</div>
       </div>
     </a>
 
@@ -840,6 +840,7 @@
     <a href="#ch-connected" data-chapter="connected">Overview and walkthrough</a>
     <a href="#email" data-chapter="connected">Email Integration</a>
     <a href="#calendar" data-chapter="connected">Calendar Integration</a>
+    <a href="#web-search" data-chapter="connected">Web Search</a>
     <a href="#bots" data-chapter="connected">Bot Integrations</a>
     <a href="#twitter" data-chapter="connected">Twitter/X Integration</a>
     <a href="#social" data-chapter="connected">Social Media Integration</a>
@@ -892,7 +893,7 @@
 
     <!-- Hero: the front page only -->
     <div class="hero">
-      <div class="hero-badge">📖 Official Documentation &middot; v<span data-skales-version>12.9.50</span></div>
+      <div class="hero-badge">📖 Official Documentation &middot; v<span data-skales-version>12.9.55</span></div>
       <h1>Skales <span>User Guide</span></h1>
       <p>Your personal AI operating system. Set a goal, automate, create, all running locally on your machine.</p>
     </div>
@@ -1439,6 +1440,9 @@
       <h2><span class="icon">💬</span> Chat</h2>
       <p>The main conversation interface. Skales remembers context, executes tools, and builds session history.</p>
 
+      <h3>The side panel</h3>
+      <p>The panel on the right of a chat has three views, switched at its top: <strong>Overview</strong> (what the conversation uses: model, context, plan, background work, connectors), <strong>Document</strong> (the document the agent writes) and <strong>Files</strong> (every file this chat made or read, with a jump to the message that made it; a message further up in a long chat is loaded and shown). In a window narrower than 1600 pixels the panel starts closed, so it never squeezes the reading column; in a wider one it starts open. Open or close it yourself and that choice is remembered at every width. When the agent brings up a document the panel opens for that moment without changing your choice. Messages carry no avatars beside the bubbles, which keeps the chat calm and leaves the room to the text.</p>
+
       <h3>Multi-Session</h3>
       <p>Every conversation is saved as a session. Browse and restore past sessions from the sidebar panel. Sessions auto-title based on your first message.</p>
 
@@ -1520,6 +1524,9 @@
       <p>A conversation can stop itself before it spends more than you meant it to. <strong>Settings &rsaquo; Goals &rsaquo; Session budget</strong> sets the ceiling; a fresh installation starts at five dollars, and a machine that already has settings keeps exactly what it had. <code>0</code> means no ceiling.</p>
       <p>At half the ceiling and again at the ceiling itself, Skales stops and asks, with three answers: <strong>carry on</strong>, <strong>switch to a cheaper model</strong>, or <strong>stop here</strong>. The question is answered here rather than by the model, so being asked costs nothing. Raise a ceiling that has already stopped a conversation and that conversation wakes up and finishes the turn it was in.</p>
       <p>The ceiling counts per session, everywhere the session goes: the chat window, the Skales Code window, a conversation carried over from Iris, and a chat sent from your paired phone. A sub-agent runs against what its conversation has left rather than against a budget of its own, and one that reaches the ceiling says so in words instead of coming back empty-handed.</p>
+      <h3>The Costs view</h3>
+      <p><strong>Costs</strong> shows where the money went: today, the last 7 or 30 days or this month, by provider and model, by area (chat, Code, Flow, tasks, pictures, background), the most expensive conversations and the tokens behind it, with tips where you could save. It counts every answer you paid for, also an earlier answer you regenerated and turns that were rolled back, so it shows the same amount as the price under the chat. Open it from the connection card at the top of the sidebar, the System popup or the Costs widget, or pin <strong>Costs</strong> into the sidebar from <strong>More</strong>: pinned, the row shows what today cost. Calls without a known price are named and never counted as free. The <strong>Activity</strong> widget on the Dashboard draws the same figures as one square per day for the last year.</p>
+
       <div class="tip"><strong>💡 Not the same as the messenger leash.</strong> Telegram and WhatsApp count per conversation <em>and per day</em>, under their own settings — that is a channel limit, and this is the ceiling for one session on this computer.</div>
     </section>
 
@@ -2581,7 +2588,7 @@
       <p><strong>Studio Classic</strong> is the set of direct generators, and it holds four: <strong>Media</strong> (image and video), <strong>Audio</strong> (voice and music), <strong>Type</strong> (kinetic typography) and the <strong>Gallery</strong>. Flow writes the pieces a brief calls for — a design, a deck, a multi-scene film with its timeline and its export card — so Classic is what you reach for when you know exactly which generator you want and want it in one press. A link that names a tab Classic does not have lands in Flow rather than on an empty stage.</p>
 
       <h3>Image Generation</h3>
-      <p>Describe what you want and choose your provider. Skales Visuals is the built-in renderer. For higher resolution or photorealism, connect Google (Nano Banana Pro, Imagen 4), OpenAI (GPT Image 1), Replicate (Flux, SDXL), HuggingFace, or a local ComfyUI or Stable Diffusion WebUI instance. Export as PNG. The full list per service is under <a href="#images">Image and Video Generation</a>.</p>
+      <p>Describe what you want and choose your provider. Skales Visuals is the built-in renderer for designed graphics: posters, banners and title cards with real typography in any aspect ratio, made right in the chat and needing no image key. Photographic or painted pictures come from an image provider. For higher resolution or photorealism, connect Google (Nano Banana Pro, Imagen 4), OpenAI (GPT Image 1), Replicate (Flux, SDXL), HuggingFace, or a local ComfyUI or Stable Diffusion WebUI instance. Export as PNG. The full list per service is under <a href="#images">Image and Video Generation</a>.</p>
 
       <h3>Video Creation</h3>
       <p>Describe a motion graphic in plain language — counters, text animations, infographics, slideshows, social posts. Skales Studio renders it instantly in the live preview. Iterate with follow-up instructions. When you're happy with the result, export as MP4 using the built-in FFmpeg renderer. Categories: Text Animation, Infographic, Data Visualization, Logo Intro, Slideshow, Social Post, Counter/Stats.</p>
@@ -2946,6 +2953,9 @@
 
       <h3>Friend Mode</h3>
       <p>When Friend Mode is enabled, the Buddy proactively reaches out — checking in, celebrating wins, or sending nudges based on your activity. Messages can be delivered via Chat, Telegram, or WhatsApp.</p>
+
+      <h3>Follow-through</h3>
+      <p>A check-in knows what is still open: running goals, tasks, schedules due within two days and the question a recent conversation ended on (private chats are never read). It may look things up with read-only tools first, then follows up on <strong>one</strong> point with the next step and a few answers to tap. A follow-up arrives on <strong>one channel only</strong>: the one you wrote on last, otherwise the first one you chose. On WhatsApp and in mail, where there are no buttons, the answers come as links. Answer <strong>done</strong> or <strong>no</strong> and the point is closed; answer <strong>later</strong>, <strong>tonight</strong>, <strong>tomorrow</strong>, <strong>this weekend</strong> or <strong>next week</strong> and it rests until then and comes back exactly once. An answer on any channel or a reply button on your phone settles it everywhere. The switch and what the last check-in cost are in the Friend Mode settings.</p>
 
       <div class="tip"><strong>💡 Tip:</strong> Friend Mode works independently of Autopilot. You don't need Autopilot enabled to receive proactive messages.</div>
     </section>
@@ -3838,6 +3848,7 @@
 
       <h3>Approving from the phone</h3>
       <p>If you allow it, a tool call that needs permission can be answered from the phone instead of at the desk. This is a switch on the desktop and it is off unless you turn it on: <strong>Skales Mobile &rsaquo; Allow approvals via mobile</strong>. Screen sharing, which lets a paired phone see the desktop screen, is a second switch beside it, also off until you turn it on.</p>
+      <p>A question waiting for you wakes a closed phone with one general sentence, &ldquo;Something needs your approval&rdquo;, and a tap opens the card. An <strong>incognito</strong> conversation wakes the phone for nothing else, and its approval says no more than that sentence: no conversation, no tool, nothing of what it wants to do. A goal that waits for you, pauses or stops wakes the phone as well, and says which.</p>
 
       <div class="tip"><strong>Add it to the home screen.</strong> Reaching Skales through a browser instead of the app works too, over Tailscale or your LAN. On iOS, Share then Add to Home Screen; on Android, the menu then Install app. You get a one-tap shortcut straight to your desktop.</div>
     </section>
@@ -3980,6 +3991,7 @@
       <div class="lead-index">
         <a href="#email">Email Integration</a>
         <a href="#calendar">Calendar Integration</a>
+        <a href="#web-search">Web Search</a>
         <a href="#bots">Bot Integrations</a>
         <a href="#twitter">Twitter/X Integration</a>
         <a href="#social">Social Media Integration</a>
@@ -4034,6 +4046,13 @@
 
       <h3>Multi-Calendar</h3>
       <p>Sync multiple calendars from the same provider. Skales unifies them into a single view for better planning.</p>
+    </section>
+
+    <section id="web-search">
+      <h2><span class="icon">🔎</span> Web Search</h2>
+      <p>Web search is always on. Under <strong>Settings &rsaquo; Accounts &amp; Services &rsaquo; Web search</strong> you set up the stages it tries, in order: the search you chose first, then every other search you have set up (Brave, Tavily, Exa, Kagi, Perplexity Sonar, Google Programmable Search, Firecrawl and others, each with its own key and a <strong>Test</strong> button), then DuckDuckGo, then the open indexes of Google News, Reddit, Hacker News, Wikipedia, Lemmy and YouTube. When one is blocked, rate-limited or finds nothing, the next one answers, and the answer says which one did. The same search within ten minutes answers at once from a short cache.</p>
+      <p><strong>A private SearXNG with one click.</strong> The Web search row can set up SearXNG on this computer and make it your search: with Docker, or with Python 3.10 or newer and git when there is no Docker. Without either, the row says exactly what is missing.</p>
+      <p><strong>Let the models search too</strong> is a switch, off until you turn it on, that lets Gemini, OpenAI, OpenRouter and xAI use their own built-in search on your key. A page that sits behind a bot check is never passed on as if it were the page: a reader you set up takes over, or the answer says the page blocks automated reading.</p>
     </section>
 
     <section id="bots">
@@ -4400,6 +4419,7 @@
         <li><strong>Background picture</strong>: pick one of the pictures that come with Skales from their small previews - <strong>Desert (auto)</strong> shows Desert Day while the app is light and Desert Night while it is dark, or choose <strong>Desert Day</strong> or <strong>Desert Night</strong> to keep one - or any PNG, JPEG, WebP, GIF or AVIF from your disk with <strong>Choose picture</strong>. Your own picture is stored as a file in the Skales data folder and stays available as <strong>Your picture</strong> while you try the others. The picture lies behind the whole window, the sidebar included. <strong>Dim</strong> fades it towards the background, <strong>Blur</strong> softens it, and <strong>Overlay colour</strong> tints it in your accent until you pick another colour. <strong>Remove</strong> turns the picture off (your own picture's file goes with it).</li>
         <li>A new installation starts on Desert (auto). During setup, the look step shows a <strong>Desert background</strong> switch while Skales X is chosen: turn it off, or finish setup on another theme, and the installation starts without a picture. What counts is the choice at the end of setup. An updated installation keeps the background it had.</li>
       </ul>
+      <p><strong>Moving backgrounds.</strong> An animated GIF can be your background picture; it is drawn without blur, because a blur would redraw the whole window on every frame, and the Blur row says so. You can also choose a short <strong>MP4 or WebM video</strong>: it plays on the graphics chip, without blur and without sound, pauses while the window is hidden or not in focus, and stands still when Background animation is off or your system asks for reduced motion.</p>
       <p>The picture belongs to the main window only: Flow and Skales Code keep their own surfaces. The blur is drawn once, so a softened picture costs nothing while you work. Classic and Flat keep their own flat background.</p>
     </section>
 
@@ -4414,6 +4434,9 @@
       completions, calendar reminders, Friend Mode check-ins, contact messages
       and product updates. Open it from the bell in the sidebar; the bell
       carries the unread count.</p>
+
+      <h3>Notification tones</h3>
+      <p><strong>Settings &rsaquo; General &rsaquo; Sound</strong> picks the tone Skales plays: the <strong>Skales</strong> tone, <strong>Glint</strong> (a bright rising chime), <strong>Ripple</strong> (three soft wooden notes) or <strong>Bloom</strong> (a warm swell). All four are equally loud and short, and they are the same four the phone offers. Choosing one plays it. On the phone you can also pick the phone's own system sound; inside the app on the computer that choice plays the Skales tone.</p>
 
       <h3>Read / Unread</h3>
       <p>Every entry is read or unread, individually or all at once. Read state
@@ -4476,7 +4499,8 @@
         <div class="card"><div class="card-title">📋 Plan</div><div class="card-desc">Today's AI-generated daily plan.</div></div>
         <div class="card"><div class="card-title">📈 Stats</div><div class="card-desc">Usage statistics, token counts, and session history.</div></div>
       </div>
-      <p style="margin-top:0.75rem;">Enable or disable widgets with <strong>Edit</strong> on the Dashboard.</p>
+      <p style="margin-top:0.75rem;"><strong>Edit</strong> on the Dashboard opens a customising mode: a line says how it works, an <strong>Add Widget</strong> tile sits in the grid (also on an empty dashboard), each widget can be dragged by its header or moved one place earlier or later with its arrows, and the bin removes it. <strong>Done</strong> or Escape ends the mode, and the order you set is kept after a restart.</p>
+      <p>Five widgets show your week: <strong>Agent runs</strong> (the last seven days, how many finished well, a click opens the Cockpit), <strong>Next 24 hours</strong> (your schedules on a day axis), <strong>Memory growth</strong> (new memories per week, each dated by when it was learned, with the newest listed under the bars), <strong>Made this week</strong> in Studio and the <strong>tools</strong> you used most. <strong>Activity</strong> shows a year of AI work at a glance and <strong>Costs</strong> today's spend.</p>
       <p style="color: var(--muted); font-size: 0.875rem;">A widget is a card on this page. When what you want is a whole screen of its own, with its own storage and its own menu entry, that is a <a href="#plugins">plugin</a> - and there is a gallery of them to install from.</p>
 
       <h3>In-App Notifications</h3>
@@ -4529,7 +4553,7 @@
       <p>Importing a backup restores everything it contains. Your Workspace, your WhatsApp session and widgets or plugins you already have are kept, and an imported widget or plugin with the same name lands beside yours instead of over it.</p>
 
       <h3>With or without secrets</h3>
-      <p>Keys and passwords are encrypted on your computer, with a key that never leaves it. A backup <strong>with secrets</strong> opens them for the trip so they work on another computer, which then encrypts them again with its own key. Keep such a file as safe as the keys themselves. A backup <strong>without secrets</strong> is the one to hand to somebody else: provider keys, integration tokens, your Skales IQ sign-in, MCP sign-ins and the remote access token are left out, the second-factor setup and the secret vault are not included, server profiles (FTP, SFTP and SSH) keep their server and user name without the password, a pasted SSH key or its passphrase, and the signed-in browser profiles (the browser the agent drives and the one that publishes to Moodle) stay on this computer.</p>
+      <p>Keys and passwords are encrypted on your computer, with a key that never leaves it. That key is held by your system&rsquo;s key store: the macOS Keychain, the Windows credential protection or the Linux secret service. <strong>Settings &rarr; System &rarr; Backup &amp; moving</strong> says where it is: in the key store; in a file only your user account can read, because the system has no key store or the key store would not take it; or, in red, that the key store will not open it on this computer, with the way out (restore a backup or enter the keys again). A backup <strong>with secrets</strong> opens them for the trip so they work on another computer, which then encrypts them again with its own key. Keep such a file as safe as the keys themselves. A backup <strong>without secrets</strong> is the one to hand to somebody else: provider keys, integration tokens, your Skales IQ sign-in, MCP sign-ins and the remote access token are left out, the second-factor setup and the secret vault are not included, server profiles (FTP, SFTP and SSH) keep their server and user name without the password, a pasted SSH key or its passphrase, and the signed-in browser profiles (the browser the agent drives and the one that publishes to Moodle) stay on this computer.</p>
       <p>Restoring a backup without secrets never replaces a working key with a placeholder. Where the backup left a credential out, the one already on this computer stays. Where there is none, the field stays empty, and the import tells you how many to enter again. Skales IQ is then signed out, MCP servers ask you to sign in, and the second factor counts as not set up.</p>
 
       <h3>Version Control</h3>
@@ -4563,6 +4587,9 @@
           <tr><td>Unrestricted</td><td>Truly unguarded: the residual guard becomes a warning instead of a block, and with File Access also set to unrestricted Skales may reach system paths, install software and talk to hardware (Bluetooth, network, devices). Full responsibility is yours.</td></tr>
         </tbody>
       </table>
+      <h3>What asks in every mode</h3>
+      <p>Some steps ask whatever mode you are in, Unrestricted included: purchases, sign-ins, publishing, exports, course uploads, deleting files on a server, a click that deletes or pays, new tool code, and changes to more than 20 messages in your mailbox. The <strong>System</strong> menu at the foot of the sidebar opens with your safety mode and one sentence on what it asks about, and the safety settings list, by group, every tool that asks first.</p>
+      <p>Helpers that the assistant starts for research, its <strong>sub-agents</strong>, can never send, post, upload or publish anything, in any mode. They hand their result back, and the main assistant delivers it under the same rules as everything else.</p>
       <h3>What a card that stops an action tells you</h3>
       <p>Every card that asks first says more than <em>what</em>. It names the action in plain words, says <strong>what happens if you say no</strong>, and says <strong>how far an "always" would actually reach</strong> — all three before you press either button, so an always-allow is never a blank cheque you find the edges of afterwards. Each button carries a sentence of its own naming exactly how far a yes reaches: <strong>this call only</strong>; <strong>every action of that kind until this session ends</strong>; or <strong>every one of them, in every session, until you take it back in Settings</strong>. A session running unattended that stops to ask anyway says why, in the words of the check that stopped it.</p>
 
@@ -4747,7 +4774,7 @@
     </section>
 
     <footer>
-      <span>Skales v<span data-skales-version>12.9.50</span> &middot; © 2024-2026 Mario Simic &middot; Proprietary licence</span>
+      <span>Skales v<span data-skales-version>12.9.55</span> &middot; © 2024-2026 Mario Simic &middot; Proprietary licence</span>
       <a href="https://skales.app">skales.app</a>
     </footer>
 
