@@ -194,6 +194,9 @@ The sidebar starts plain: **Dashboard, Chat, Code, Studio**, and one **More** bu
 
 The front door. Ask a question, or hand over a task and let it run.
 
+- **Slides, a document or a note beside the chat.** The mode pill under the input switches a chat to Slides, Document, Note or Automation. The work opens in the side panel and changes exactly where you comment; a deck's toolbar adds text boxes, pictures, tables and shapes by hand, and a pencil on the new-chat page starts from six templates.
+- **Reactions on every message,** a right-click menu with Copy, Quote in reply and Edit, and chats that sort into groups and projects.
+- **Your own company gateway.** A custom endpoint (LiteLLM, Bifrost or any OpenAI-compatible gateway) carries its own secret headers, knows the real context window behind a prefixed model name and shows the gateway's own price.
 - **`/goal` turns a request into ongoing work.** It plans the steps and runs them on its own, in the background, with the app closed. It does not ask you to continue: it stops when the task is done, when it genuinely needs a decision, or before a consequential action like sending an email, where it asks once with a one-tap always-allow. Reopen the app and it picks up where it left off. A goal is only finished when its own success criteria are met, and what it learned folds back into Memory. Run several at once, or put one on a repeating schedule.
 - **`/code` binds a folder to this conversation,** without leaving it. Four modes under the composer: **Plan** investigates and proposes, **Code** asks before each edit, **Edits** approves file edits as it goes but still asks before a shell command or a push, **Auto** runs the whole task after a one-time consent. Inline git diffs with an added/removed count, a repo map so it heads straight to the right file in a large codebase, `@` to point at a file by name, and one-click Undo per file or for a whole turn. It commits and pushes with **your own git identity**, no added attribution.
 - **`/spin` writes a text again in a plainer voice.** `/spin <text>` rewrites what you hand it, `/spin` on its own rewrites the last answer, and the same action sits in the message menu next to Copy. Select part of a reply and right click the selection to rewrite just that passage, with copy, quote, read aloud and save-to-document beside it. It runs on a model you pick for the job, and a local one keeps the text on your machine.
@@ -385,6 +388,8 @@ No vendor lock-in. Bring your own key, or run locally for free.
 ---
 
 ## 📦 Installation
+
+Skales runs natively on Windows on Arm (Snapdragon and other Arm PCs) with its own installer, `Skales-Setup-<version>-arm64.exe`.
 
 **[Download here](https://skales.app)**
 
