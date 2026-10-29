@@ -5,7 +5,7 @@
 The private AI that lives on your computer and does real work, not just chat.
 
 <p align="center">
-  <img width="960" alt="Skales Scout: runs on your desk, locked in its own virtual machine" src="docs/readme/scout-banner.webp" />
+  <img width="960" alt="Skales dashboard in the Skales X light theme with the Desert background" src="docs/readme/hero-dashboard-desert.jpg" />
 </p>
  <p>
     <a href="https://github.com/skalesapp/skales/releases/latest"><img src="https://img.shields.io/badge/version-12.9.60-10b981?style=flat-square" alt="Version 12.9.60" /></a>
@@ -169,6 +169,22 @@ Skales is an AI agent that lives on your desktop. Not in a browser tab, not behi
 *A 6-year-old built a game with it. A grandmother approved the setup.*
 
 ---
+
+## 🐡 Skales Scout: a helper that keeps working while you do something else
+
+<p align="center">
+  <img width="960" alt="Skales Scout: runs on your desk, locked in its own virtual machine" src="docs/readme/scout-banner.webp" />
+</p>
+
+A scout is a lasting agent that lives on your computer with its own thread, memory and rhythm. It has a name, a role and a personality, stays in one thread for months without losing track, and remembers what it learned.
+
+- **Its own small computer.** On a Mac, on Windows and on Linux a scout can get a virtual machine that reaches the internet but never your home network. You watch it work live, take over when you want, and its results come back as files you can open.
+- **A day of its own.** Without being asked it keeps rounds, a standup and an evening summary, splits goals over several days into parts, and brings suggestions you answer with Go or Wait.
+- **A team when the job is bigger.** A lead scout shares work with its sub-scouts and short-lived helpers. Each scout can have its own model and a daily budget, the cost of every run is in view, and a fallback model is never used in silence.
+- **You decide how far it goes.** Approvals say how far your yes reaches. Sites, purchases, the apps you connected and a mailbox of its own are allowed per scout, and sign-ins stored once in Skales Vault are handed out entry by entry.
+- **On your phone too.** The same Scout page, questions, approvals and settings, with a scout that can live on the phone alone when there is no computer.
+
+**Automations** sit right beside it: switch a chat to the **Automation** mode and Skales builds the automation next to the conversation, on the same canvas Flow opens. Start it by hand, on a schedule, from a file or folder, by a webhook or from another run.
 
 ## 🚪 The eleven places Skales lives
 
