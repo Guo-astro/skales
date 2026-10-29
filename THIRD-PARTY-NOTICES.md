@@ -657,3 +657,83 @@ Apache License
    See the License for the specific language governing permissions and
    limitations under the License.
 ```
+
+---
+
+## JavaScript source parser — Acorn
+
+Skales uses **Acorn 8.16.0** (https://github.com/acornjs/acorn) to inspect
+authored motion JavaScript without running it. Acorn is used under the MIT
+License, reproduced below.
+
+```
+MIT License
+
+Copyright (C) 2012-2022 by various contributors (see AUTHORS)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+
+---
+
+## Scout live picture viewer - noVNC
+
+Skales uses **noVNC 1.7.0** (https://github.com/novnc/noVNC) to show the live
+picture of a Scout's computer inside the app. The noVNC core library is used
+unmodified, as published on npm as `@novnc/novnc`, under the Mozilla Public
+License 2.0 (https://www.mozilla.org/MPL/2.0/). Its source code is available
+at https://github.com/novnc/noVNC/tree/v1.7.0 and in the npm package itself.
+Files vendored by noVNC keep their own licences (pako: MIT). The full licence
+texts ship with the package (`docs/LICENSE.MPL-2.0`, `vendor/pako/LICENSE`)
+and are listed with the other components in the About screen.
+
+noVNC is Copyright (C) 2022 The noVNC authors.
+
+---
+
+## Scout workspace image and VM components
+
+The Scout workspace is a separate disk image that Skales downloads on request
+and runs as its own virtual machine next to Skales. It is built on Debian
+(Debian 13, packages from the Debian `main` archive only) and contains free
+software under the GNU General Public License (GPL), the GNU Lesser General
+Public License (LGPL) and other licences, among them the Linux kernel,
+systemd, Chromium, Python, Node.js and git. On Windows, Skales additionally
+ships QEMU to run that image, and on Linux, Cloud Hypervisor (Apache License
+2.0 and BSD 3-Clause), unmodified and as its own program. On macOS each Scout
+VM runs inside skales-vmd, Skales' own helper, which includes Code-Hex/vz and
+go-infinity-channel (MIT) and the Go standard library and golang.org/x/mod
+(BSD 3-Clause); their licence texts are listed with the other components
+below. Each component keeps its own copyright notice
+and licence text inside the image (`/usr/share/doc/<package>/copyright` and
+`/usr/share/common-licenses/`), and every image release carries the list of
+packages with their versions and licences.
+
+The workspace image and QEMU contain free software under GPL, LGPL and other
+licences. The complete source code of these components is published with each
+image version, in the same release as the image:
+https://github.com/skalesapp/skales/releases (releases named
+`scout-image-v<version>`: the `sources` parts and `SOURCES.txt`). The Debian
+snapshot the image was built from is named in each release as well.
+
+Third-party components are under their own licences. The Skales `LICENSE`,
+`LICENSE.de` and `TRADEMARK.md` do not apply to them, and nothing in this
+section is a statement about the licence of Skales itself. Debian is a
+registered trademark of Software in the Public Interest, Inc.; Skales is not
+affiliated with or endorsed by the Debian project.
